@@ -47,7 +47,7 @@
 </ul>
 <p>To achieve this, I used the concept of shared/synced folders. Development files are kept on the host machine, where I can use an IDE such as PyCharm for development, but are also be mounted in my devstack VM via NFS. In fact, the entire Devstack's <code>/opt/stack</code> directory is kept on the host machine. For easy setup, I used <a href="Vagrant%201.3.5">http://www.vagrantup.com</a> and <a href="Virtualbox%204.3.2">https://www.virtualbox.org</a>.</p>
 <p><img alt="Vagrant and PyCharm" src="images/vagrantpycharm.png" /></p>
-<p>With the help of blog posts by <a href="http://terriyu.info/blog/posts/2013/07/installing-devstack-ceilometer/">Terri Yu</a>, <a href="http://anteaya.info/blog/2013/09/01/installing-devstack-with-vagrant/">Anita Kuno</a> and many helpful tips from John Herndon of HP, I came up with this Vagrantfile (<a href="download">https://gist.github.com/nsaje/14f72ce299f6cc1275ae/download</a>:</p>
+<p>With the help of blog posts by <a href="http://terriyu.info/blog/posts/2013/07/installing-devstack-ceilometer/">Terri Yu</a>, <a href="http://anteaya.info/blog/2013/09/01/installing-devstack-with-vagrant/">Anita Kuno</a> and many helpful tips from John Herndon of HP, I came up with this Vagrantfile (<a href="https://gist.github.com/nsaje/14f72ce299f6cc1275ae/download">download</a>):</p>
 <div class="highlight"><pre><span class="err">$</span><span class="n">script</span> <span class="o">=</span> <span class="o">&lt;&lt;</span><span class="n">SCRIPT</span>
 <span class="cp"># download required packages</span>
 <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
