@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Nejc Saje</title><link href="http://nsaje.si/" rel="alternate"></link><link href="http://nsaje.si/feeds/openstack.atom.xml" rel="self"></link><id>http://nsaje.si/</id><updated>2013-11-15T10:20:00+01:00</updated><entry><title>OpenStack development with Vagrant and PyCharm</title><link href="http://nsaje.si/openstack-development-with-vagrant-and-pycharm.html" rel="alternate"></link><updated>2013-11-15T10:20:00+01:00</updated><author><name>Nejc Saje</name></author><id>tag:nsaje.si,2013-11-15:openstack-development-with-vagrant-and-pycharm.html</id><summary type="html">&lt;p&gt;Up until now, my OpenStack development setup looked like this:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;devstack running in a VM,&lt;/li&gt;
+&lt;li&gt;developing using tmux &amp;amp; vim over SSH.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Since I was hearing good things about PyCharm, I decided to give it a try. The idea of the setup is as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;devstack running in a VM,&lt;/li&gt;
+&lt;li&gt;developing using PyCharm running locally.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;To achieve this, I used the concept of shared/synced folders. Development files are kept on the host machine, where I can use an IDE such as PyCharm for development, but are also be mounted in my devstack VM via NFS. In fact, the entire Devstack's &lt;code&gt;/opt/stack&lt;/code&gt; directory is kept on the host machine. For easy setup, I used &lt;a href="http://www.vagrantup.com"&gt;Vagrant 1.3.5&lt;/a&gt; and &lt;a href="https://www.virtualbox.org"&gt;Virtualbox 4.3.2&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Vagrant and PyCharm" src="images/vagrantpycharm.png" /&gt;&lt;/p&gt;
+&lt;p&gt;With the help of blog posts by &lt;a href="http://terriyu.info/blog/posts/2013/07/installing-devstack-ceilometer/"&gt;Terri Yu&lt;/a&gt;, &lt;a href="http://anteaya.info/blog/2013/09/01/installing-devstack-with-vagrant/"&gt;Anita Kuno&lt;/a&gt; and many helpful tips from John Herndon of HP, I came up with this Vagrantfile (&lt;a href="https://gist.github.com/nsaje/14f72ce299f6cc1275ae/download"&gt;download&lt;/a&gt;):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;script&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;SCRIPT&lt;/span&gt;
+&lt;span class="cp"&gt;# download required packages&lt;/span&gt;
+&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;update&lt;/span&gt;
+&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;vim&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;gtk&lt;/span&gt; &lt;span class="n"&gt;libxml2&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt; &lt;span class="n"&gt;libxslt1&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt; &lt;span class="n"&gt;libpq&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;libsqlite3&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;
+&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="n"&gt;build&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dep&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mysqldb&lt;/span&gt;
+&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;git&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;review&lt;/span&gt; &lt;span class="n"&gt;tox&lt;/span&gt;
+
+&lt;span class="cp"&gt;# download devstack&lt;/span&gt;
+&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;clone&lt;/span&gt; &lt;span class="n"&gt;git&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;//git.openstack.org/openstack-dev/devstack&lt;/span&gt;
+&lt;span class="n"&gt;chown&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;R&lt;/span&gt; &lt;span class="n"&gt;vagrant&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;vagrant&lt;/span&gt; &lt;span class="n"&gt;devstack&lt;/span&gt;
+
+&lt;span class="cp"&gt;# create minimal localrc&lt;/span&gt;
+&lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;_LOCALRC&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;devstack&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;localrc&lt;/span&gt;
+&lt;span class="n"&gt;ADMIN_PASSWORD&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;
+&lt;span class="n"&gt;MYSQL_PASSWORD&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;
+&lt;span class="n"&gt;RABBIT_PASSWORD&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;
+&lt;span class="n"&gt;SERVICE_PASSWORD&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;
+&lt;span class="n"&gt;SERVICE_TOKEN&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;tokentoken&lt;/span&gt;
+
+&lt;span class="n"&gt;LOGFILE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;stack&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;
+&lt;span class="n"&gt;LOGDAYS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+
+&lt;span class="cp"&gt;# data must not be inside NFS share&lt;/span&gt;
+&lt;span class="cp"&gt;# because devstack tries to chown directories&lt;/span&gt;
+&lt;span class="cp"&gt;# and NFS doesn&amp;#39;t allow it&lt;/span&gt;
+&lt;span class="n"&gt;DATA_DIR&lt;/span&gt;&lt;span class="o"&gt;=/&lt;/span&gt;&lt;span class="n"&gt;opt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;
+&lt;span class="n"&gt;_LOCALRC&lt;/span&gt;
+&lt;span class="n"&gt;SCRIPT&lt;/span&gt;
+
+&lt;span class="cp"&gt;## Vagrant config&lt;/span&gt;
+&lt;span class="n"&gt;VAGRANTFILE_API_VERSION&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;2&amp;quot;&lt;/span&gt;
+
+&lt;span class="n"&gt;Vagrant&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;configure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;VAGRANTFILE_API_VERSION&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;box&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;precise64&amp;quot;&lt;/span&gt;
+  &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;box_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;http://files.vagrantup.com/precise64.box&amp;quot;&lt;/span&gt;
+
+  &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="n"&gt;Change&lt;/span&gt; &lt;span class="n"&gt;memory&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;our&lt;/span&gt; &lt;span class="n"&gt;VM&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="mi"&gt;2048&lt;/span&gt;&lt;span class="n"&gt;MB&lt;/span&gt;
+  &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;provider&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;virtualbox&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;vb&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+    &lt;span class="n"&gt;vb&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;customize&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;modifyvm&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;--memory&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;2048&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="n"&gt;end&lt;/span&gt;
+
+  &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="n"&gt;Forward&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;Horizon&lt;/span&gt;
+  &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;network&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;forwarded_port&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;guest&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;8080&lt;/span&gt;
+
+  &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="n"&gt;Private&lt;/span&gt; &lt;span class="n"&gt;network&lt;/span&gt; &lt;span class="n"&gt;IP&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;needed&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;NFS&lt;/span&gt;
+  &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;network&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;private_network&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ip&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;192.168.33.10&amp;quot;&lt;/span&gt;
+
+  &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;opt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;stack&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;synced&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;vagrant&lt;/span&gt; &lt;span class="n"&gt;project&lt;/span&gt; &lt;span class="n"&gt;dir&lt;/span&gt; &lt;span class="n"&gt;over&lt;/span&gt; &lt;span class="n"&gt;NFS&lt;/span&gt;
+  &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;synced_folder&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;/opt/stack&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nfs&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;
+
+  &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;provision&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;shell&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kr"&gt;inline&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;script&lt;/span&gt;
+&lt;span class="n"&gt;end&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;All you need to do to get a Devstack development environment with its &lt;code&gt;/opt/stack&lt;/code&gt; kept on the host machine is copy this Vagrantfile into your directory of choice and run&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;vagrant&lt;/span&gt; &lt;span class="n"&gt;up&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Setting up PyCharm&lt;/h2&gt;
+&lt;p&gt;This part is really easy, just follow the instructions at &lt;a href=""&gt;https://www.jetbrains.com/pycharm/webhelp/remote-debugging.html#5&lt;/a&gt;. Basically you just click a button that fills in your Vagrant config and voilà, you can run and debug projects on your devstack VM.&lt;/p&gt;
+&lt;h2&gt;Lessons learned&lt;/h2&gt;
+&lt;p&gt;I was warned about these by John Herndon, but I had to try them out myself to see why:&lt;/p&gt;
+&lt;h4&gt;1. Devstack's DATA_DIR variable mustn't reside on the NFS share&lt;/h4&gt;
+&lt;p&gt;Nova creates stuff in the data directory with root permissions and then tries to &lt;code&gt;chown&lt;/code&gt; them, which fails on the NFS share.&lt;/p&gt;
+&lt;h4&gt;2. NFS share must reside on a case-sensitive filesystem&lt;/h4&gt;
+&lt;p&gt;Unit tests for some projects require python packages that have the same name, save for the case. In my case, the problematic packages were &lt;code&gt;Crypto&lt;/code&gt; and &lt;code&gt;crypto&lt;/code&gt;.&lt;/p&gt;</summary><category term="python"></category><category term="openstack"></category><category term="devstack"></category><category term="vagrant"></category><category term="pycharm"></category><category term="remote"></category><category term="development"></category></entry></feed>
