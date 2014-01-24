@@ -1,5 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Nejc Saje</title><link href="http://nsaje.si/" rel="alternate"></link><link href="http://nsaje.si/feeds/all.atom.xml" rel="self"></link><id>http://nsaje.si/</id><updated>2013-11-15T10:20:00+01:00</updated><entry><title>OpenStack development with Vagrant and PyCharm</title><link href="http://nsaje.si/openstack-development-with-vagrant-and-pycharm.html" rel="alternate"></link><updated>2013-11-15T10:20:00+01:00</updated><author><name>Nejc Saje</name></author><id>tag:nsaje.si,2013-11-15:openstack-development-with-vagrant-and-pycharm.html</id><summary type="html">&lt;p&gt;Up until now, my OpenStack development setup looked like this:&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Nejc Saje</title><link href="http://nsaje.si/" rel="alternate"></link><link href="http://nsaje.si/feeds/all.atom.xml" rel="self"></link><id>http://nsaje.si/</id><updated>2013-12-31T10:20:00+01:00</updated><entry><title>Dependency-less REST CPU burner in Go</title><link href="http://nsaje.si/dependency-less-rest-cpu-burner-in-go.html" rel="alternate"></link><updated>2013-12-31T10:20:00+01:00</updated><author><name>Nejc Saje</name></author><id>tag:nsaje.si,2013-12-31:dependency-less-rest-cpu-burner-in-go.html</id><summary type="html">&lt;p&gt;Disclaimer: not really REST, but writing HTTP-controlled made the title too long.&lt;/p&gt;
+&lt;h2&gt;TL;DR&lt;/h2&gt;
+&lt;p&gt;When compiled with &lt;code&gt;CGO_ENABLED=0&lt;/code&gt;, this code produces a static binary file that can be uploaded to a server and run.
+CPU burn can be started by requesting &lt;code&gt;/start_cpu&lt;/code&gt; and stopped by requesting &lt;code&gt;/stop_cpu&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Long version&lt;/h2&gt;
+&lt;p&gt;Recently I had to implement an integration test in which I had to fire up a virtual machine and control its CPU load. The first idea was to write a simple Python web service, so I could control the CPU load via HTTP requests. The testing was being done on devstack though, and its test VM image is that of &lt;a href="https://launchpad.net/cirros"&gt;CirrOS&lt;/a&gt;, which only includes Busybox and no Python.&lt;/p&gt;
+&lt;p&gt;So I needed a static binary I could just &lt;code&gt;scp&lt;/code&gt; on the VM and run. &lt;a href="http://golang.org"&gt;Go&lt;/a&gt; turned out to be the answer to my problem. Even though I never programmed in Go before, I soon had a working HTTP-controlled staticly linked web service. To achieve static linking, the compiler and the code needs to be compiled with environment variable &lt;code&gt;CGO_ENABLED=0&lt;/code&gt; (&lt;a href="https://groups.google.com/forum/#!topic/golang-nuts/Rw89bnhPBUI"&gt;issue&lt;/a&gt;).&lt;/p&gt;
+&lt;h3&gt;Cross compilation&lt;/h3&gt;
+&lt;p&gt;On top of that, Go allowed me to easily cross-compile a Linux binary on OSX just by (quickly) recompiling Go compiler with Linux support&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;go&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;src&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;GOOS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;linux&lt;/span&gt; &lt;span class="n"&gt;GOARCH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;386&lt;/span&gt; &lt;span class="n"&gt;CGO_ENABLED&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;make&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bash&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;no&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;clean&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;and then compiling my code with additional options &lt;code&gt;GOOS=linux GOARCH=386&lt;/code&gt;.
+Other platforms are similar, for more information take a look at &lt;a href="http://dave.cheney.net/2012/09/08/an-introduction-to-cross-compilation-with-go"&gt;An introduction to cross compilation with Go&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;package main
+
+import &lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;fmt&amp;quot;&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;net/http&amp;quot;&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;time&amp;quot;&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+
+var burnCpu &lt;span class="o"&gt;=&lt;/span&gt; make&lt;span class="p"&gt;(&lt;/span&gt;chan bool&lt;span class="p"&gt;)&lt;/span&gt;
+
+func cpuBurn&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    var burn bool &lt;span class="o"&gt;=&lt;/span&gt; false
+    &lt;span class="kr"&gt;for&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        select &lt;span class="p"&gt;{&lt;/span&gt;
+        case burn &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt;burnCpu&lt;span class="o"&gt;:&lt;/span&gt;
+        default&lt;span class="o"&gt;:&lt;/span&gt;
+            &lt;span class="kr"&gt;if&lt;/span&gt; burn &lt;span class="p"&gt;{&lt;/span&gt;
+                _ &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="kr"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                time.Sleep&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; time.Millisecond&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+func startCpu&lt;span class="p"&gt;(&lt;/span&gt;w http.ResponseWriter&lt;span class="p"&gt;,&lt;/span&gt; r &lt;span class="o"&gt;*&lt;/span&gt;http.Request&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    fmt.Fprintf&lt;span class="p"&gt;(&lt;/span&gt;w&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Starting CPU burn\n&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    burnCpu &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; true
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+func stopCpu&lt;span class="p"&gt;(&lt;/span&gt;w http.ResponseWriter&lt;span class="p"&gt;,&lt;/span&gt; r &lt;span class="o"&gt;*&lt;/span&gt;http.Request&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    fmt.Fprintf&lt;span class="p"&gt;(&lt;/span&gt;w&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Stopping CPU burn\n&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    burnCpu &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; false
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+func main&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    go cpuBurn&lt;span class="p"&gt;()&lt;/span&gt;
+    http.HandleFunc&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/start_cpu&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; startCpu&lt;span class="p"&gt;)&lt;/span&gt;
+    http.HandleFunc&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/stop_cpu&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; stopCpu&lt;span class="p"&gt;)&lt;/span&gt;
+    http.ListenAndServe&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;:8080&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; nil&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="golang"></category><category term="openstack"></category><category term="cirros"></category></entry><entry><title>OpenStack development with Vagrant and PyCharm</title><link href="http://nsaje.si/openstack-development-with-vagrant-and-pycharm.html" rel="alternate"></link><updated>2013-11-15T10:20:00+01:00</updated><author><name>Nejc Saje</name></author><id>tag:nsaje.si,2013-11-15:openstack-development-with-vagrant-and-pycharm.html</id><summary type="html">&lt;p&gt;Up until now, my OpenStack development setup looked like this:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;devstack running in a VM,&lt;/li&gt;
 &lt;li&gt;developing using tmux &amp;amp; vim over SSH.&lt;/li&gt;

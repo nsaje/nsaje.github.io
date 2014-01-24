@@ -17,7 +17,7 @@
 
         <!--[if lt IE 7]>
                 <link rel="stylesheet" type="text/css" media="all" href="./css/ie6.css"/><![endif]-->
-
+    <meta name="google-site-verification" content="iyShpGGQFM1qwTkdPIfkCifWJGSQCXLImZNTO729X-s" />
 </head>
 
 <body>
@@ -36,91 +36,77 @@
         
 
             <header>
-                <h1><a href="./openstack-development-with-vagrant-and-pycharm.html" id="page-title">OpenStack development with Vagrant and PyCharm</a></h1>
-<time datetime="2013-11-15T10:20:00">Fri 15 November 2013</time>            </header>
+                <h1><a href="./dependency-less-rest-cpu-burner-in-go.html" id="page-title">Dependency-less REST CPU burner in Go</a></h1>
+<time datetime="2013-12-31T10:20:00">Tue 31 December 2013</time>            </header>
 
             <article>
-                <p>Up until now, my OpenStack development setup looked like this:</p>
-<ul>
-<li>devstack running in a VM,</li>
-<li>developing using tmux &amp; vim over SSH.</li>
-</ul>
-<p>Since I was hearing good things about PyCharm, I decided to give it a try. The idea of the setup is as follows:</p>
-<ul>
-<li>devstack running in a VM,</li>
-<li>developing using PyCharm running locally.</li>
-</ul>
-<p>To achieve this, I used the concept of shared/synced folders. Development files are kept on the host machine, where I can use an IDE such as PyCharm for development, but are also be mounted in my devstack VM via NFS. In fact, the entire Devstack's <code>/opt/stack</code> directory is kept on the host machine. For easy setup, I used <a href="http://www.vagrantup.com">Vagrant 1.3.5</a> and <a href="https://www.virtualbox.org">Virtualbox 4.3.2</a>.</p>
-<p><img alt="Vagrant and PyCharm" src="images/vagrantpycharm.png" /></p>
-<p>With the help of blog posts by <a href="http://terriyu.info/blog/posts/2013/07/installing-devstack-ceilometer/">Terri Yu</a>, <a href="http://anteaya.info/blog/2013/09/01/installing-devstack-with-vagrant/">Anita Kuno</a> and many helpful tips from John Herndon of HP, I came up with this Vagrantfile (<a href="https://gist.github.com/nsaje/14f72ce299f6cc1275ae/download">download</a>):</p>
-<div class="highlight"><pre><span class="err">$</span><span class="n">script</span> <span class="o">=</span> <span class="o">&lt;&lt;</span><span class="n">SCRIPT</span>
-<span class="cp"># download required packages</span>
-<span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
-<span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">git</span> <span class="n">vim</span><span class="o">-</span><span class="n">gtk</span> <span class="n">libxml2</span><span class="o">-</span><span class="n">dev</span> <span class="n">libxslt1</span><span class="o">-</span><span class="n">dev</span> <span class="n">libpq</span><span class="o">-</span><span class="n">dev</span> <span class="n">python</span><span class="o">-</span><span class="n">pip</span> <span class="n">libsqlite3</span><span class="o">-</span><span class="n">dev</span>
-<span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="o">-</span><span class="n">y</span> <span class="n">build</span><span class="o">-</span><span class="n">dep</span> <span class="n">python</span><span class="o">-</span><span class="n">mysqldb</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">-</span><span class="n">review</span> <span class="n">tox</span>
-
-<span class="cp"># download devstack</span>
-<span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="o">:</span><span class="c1">//git.openstack.org/openstack-dev/devstack</span>
-<span class="n">chown</span> <span class="o">-</span><span class="n">R</span> <span class="n">vagrant</span><span class="o">:</span><span class="n">vagrant</span> <span class="n">devstack</span>
-
-<span class="cp"># create minimal localrc</span>
-<span class="n">cat</span> <span class="o">&lt;&lt;</span><span class="n">_LOCALRC</span> <span class="o">&gt;</span> <span class="n">devstack</span><span class="o">/</span><span class="n">localrc</span>
-<span class="n">ADMIN_PASSWORD</span><span class="o">=</span><span class="n">password</span>
-<span class="n">MYSQL_PASSWORD</span><span class="o">=</span><span class="n">password</span>
-<span class="n">RABBIT_PASSWORD</span><span class="o">=</span><span class="n">password</span>
-<span class="n">SERVICE_PASSWORD</span><span class="o">=</span><span class="n">password</span>
-<span class="n">SERVICE_TOKEN</span><span class="o">=</span><span class="n">tokentoken</span>
-
-<span class="n">LOGFILE</span><span class="o">=</span><span class="n">stack</span><span class="p">.</span><span class="n">sh</span><span class="p">.</span><span class="n">log</span>
-<span class="n">LOGDAYS</span><span class="o">=</span><span class="mi">1</span>
-
-<span class="cp"># data must not be inside NFS share</span>
-<span class="cp"># because devstack tries to chown directories</span>
-<span class="cp"># and NFS doesn&#39;t allow it</span>
-<span class="n">DATA_DIR</span><span class="o">=/</span><span class="n">opt</span><span class="o">/</span><span class="n">data</span>
-<span class="n">_LOCALRC</span>
-<span class="n">SCRIPT</span>
-
-<span class="cp">## Vagrant config</span>
-<span class="n">VAGRANTFILE_API_VERSION</span> <span class="o">=</span> <span class="s">&quot;2&quot;</span>
-
-<span class="n">Vagrant</span><span class="p">.</span><span class="n">configure</span><span class="p">(</span><span class="n">VAGRANTFILE_API_VERSION</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
-  <span class="n">config</span><span class="p">.</span><span class="n">vm</span><span class="p">.</span><span class="n">box</span> <span class="o">=</span> <span class="s">&quot;precise64&quot;</span>
-  <span class="n">config</span><span class="p">.</span><span class="n">vm</span><span class="p">.</span><span class="n">box_url</span> <span class="o">=</span> <span class="s">&quot;http://files.vagrantup.com/precise64.box&quot;</span>
-
-  <span class="err">#</span> <span class="n">Change</span> <span class="n">memory</span> <span class="n">of</span> <span class="n">our</span> <span class="n">VM</span> <span class="n">to</span> <span class="mi">2048</span><span class="n">MB</span>
-  <span class="n">config</span><span class="p">.</span><span class="n">vm</span><span class="p">.</span><span class="n">provider</span> <span class="o">:</span><span class="n">virtualbox</span> <span class="k">do</span> <span class="o">|</span><span class="n">vb</span><span class="o">|</span>
-    <span class="n">vb</span><span class="p">.</span><span class="n">customize</span> <span class="p">[</span><span class="s">&quot;modifyvm&quot;</span><span class="p">,</span> <span class="o">:</span><span class="n">id</span><span class="p">,</span> <span class="s">&quot;--memory&quot;</span><span class="p">,</span> <span class="s">&quot;2048&quot;</span><span class="p">]</span>
-  <span class="n">end</span>
-
-  <span class="err">#</span> <span class="n">Forward</span> <span class="n">port</span> <span class="k">for</span> <span class="n">Horizon</span>
-  <span class="n">config</span><span class="p">.</span><span class="n">vm</span><span class="p">.</span><span class="n">network</span> <span class="o">:</span><span class="n">forwarded_port</span><span class="p">,</span> <span class="n">guest</span><span class="o">:</span> <span class="mi">80</span><span class="p">,</span> <span class="n">host</span><span class="o">:</span> <span class="mi">8080</span>
-
-  <span class="err">#</span> <span class="n">Private</span> <span class="n">network</span> <span class="n">IP</span><span class="p">,</span> <span class="n">needed</span> <span class="k">for</span> <span class="n">NFS</span>
-  <span class="n">config</span><span class="p">.</span><span class="n">vm</span><span class="p">.</span><span class="n">network</span> <span class="o">:</span><span class="n">private_network</span><span class="p">,</span> <span class="n">ip</span><span class="o">:</span> <span class="s">&quot;192.168.33.10&quot;</span>
-
-  <span class="err">#</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">stack</span> <span class="n">is</span> <span class="n">synced</span> <span class="n">with</span> <span class="n">vagrant</span> <span class="n">project</span> <span class="n">dir</span> <span class="n">over</span> <span class="n">NFS</span>
-  <span class="n">config</span><span class="p">.</span><span class="n">vm</span><span class="p">.</span><span class="n">synced_folder</span> <span class="s">&quot;.&quot;</span><span class="p">,</span> <span class="s">&quot;/opt/stack&quot;</span><span class="p">,</span> <span class="n">nfs</span><span class="o">:</span> <span class="nb">true</span>
-
-  <span class="n">config</span><span class="p">.</span><span class="n">vm</span><span class="p">.</span><span class="n">provision</span> <span class="s">&quot;shell&quot;</span><span class="p">,</span> <span class="kr">inline</span><span class="o">:</span> <span class="err">$</span><span class="n">script</span>
-<span class="n">end</span>
+                <p>Disclaimer: not really REST, but writing HTTP-controlled made the title too long.</p>
+<h2>TL;DR</h2>
+<p>When compiled with <code>CGO_ENABLED=0</code>, this code produces a static binary file that can be uploaded to a server and run.
+CPU burn can be started by requesting <code>/start_cpu</code> and stopped by requesting <code>/stop_cpu</code>.</p>
+<h2>Long version</h2>
+<p>Recently I had to implement an integration test in which I had to fire up a virtual machine and control its CPU load. The first idea was to write a simple Python web service, so I could control the CPU load via HTTP requests. The testing was being done on devstack though, and its test VM image is that of <a href="https://launchpad.net/cirros">CirrOS</a>, which only includes Busybox and no Python.</p>
+<p>So I needed a static binary I could just <code>scp</code> on the VM and run. <a href="http://golang.org">Go</a> turned out to be the answer to my problem. Even though I never programmed in Go before, I soon had a working HTTP-controlled staticly linked web service. To achieve static linking, the compiler and the code needs to be compiled with environment variable <code>CGO_ENABLED=0</code> (<a href="https://groups.google.com/forum/#!topic/golang-nuts/Rw89bnhPBUI">issue</a>).</p>
+<h3>Cross compilation</h3>
+<p>On top of that, Go allowed me to easily cross-compile a Linux binary on OSX just by (quickly) recompiling Go compiler with Linux support</p>
+<div class="highlight"><pre><span class="n">cd</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">go</span><span class="o">/</span><span class="n">src</span>
+<span class="n">sudo</span> <span class="n">GOOS</span><span class="o">=</span><span class="n">linux</span> <span class="n">GOARCH</span><span class="o">=</span><span class="mi">386</span> <span class="n">CGO_ENABLED</span><span class="o">=</span><span class="mi">0</span> <span class="p">.</span><span class="o">/</span><span class="n">make</span><span class="p">.</span><span class="n">bash</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">clean</span>
 </pre></div>
 
 
-<p>All you need to do to get a Devstack development environment with its <code>/opt/stack</code> kept on the host machine is copy this Vagrantfile into your directory of choice and run</p>
-<div class="highlight"><pre><span class="n">vagrant</span> <span class="n">up</span>
-</pre></div>
+<p>and then compiling my code with additional options <code>GOOS=linux GOARCH=386</code>.
+Other platforms are similar, for more information take a look at <a href="http://dave.cheney.net/2012/09/08/an-introduction-to-cross-compilation-with-go">An introduction to cross compilation with Go</a>.</p>
+<div class="highlight"><pre>package main
 
+import <span class="p">(</span>
+    <span class="s">&quot;fmt&quot;</span>
+    <span class="s">&quot;net/http&quot;</span>
+    <span class="s">&quot;time&quot;</span>
+<span class="p">)</span>
 
-<h2>Setting up PyCharm</h2>
-<p>This part is really easy, just follow the instructions at <a href="">https://www.jetbrains.com/pycharm/webhelp/remote-debugging.html#5</a>. Basically you just click a button that fills in your Vagrant config and voilà, you can run and debug projects on your devstack VM.</p>
-<h2>Lessons learned</h2>
-<p>I was warned about these by John Herndon, but I had to try them out myself to see why:</p>
-<h4>1. Devstack's DATA_DIR variable mustn't reside on the NFS share</h4>
-<p>Nova creates stuff in the data directory with root permissions and then tries to <code>chown</code> them, which fails on the NFS share.</p>
-<h4>2. NFS share must reside on a case-sensitive filesystem</h4>
-<p>Unit tests for some projects require python packages that have the same name, save for the case. In my case, the problematic packages were <code>Crypto</code> and <code>crypto</code>.</p><p>View <a href="./openstack-development-with-vagrant-and-pycharm.html#disqus_thread">comments</a>.</p>            </article>
+var burnCpu <span class="o">=</span> make<span class="p">(</span>chan bool<span class="p">)</span>
+
+func cpuBurn<span class="p">()</span> <span class="p">{</span>
+    var burn bool <span class="o">=</span> false
+    <span class="kr">for</span> <span class="p">{</span>
+        select <span class="p">{</span>
+        case burn <span class="o">=</span> <span class="o">&lt;-</span>burnCpu<span class="o">:</span>
+        default<span class="o">:</span>
+            <span class="kr">if</span> burn <span class="p">{</span>
+                _ <span class="o">=</span> <span class="m">5</span><span class="o">*</span><span class="m">5</span>
+            <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
+                time.Sleep<span class="p">(</span><span class="m">100</span> <span class="o">*</span> time.Millisecond<span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+func startCpu<span class="p">(</span>w http.ResponseWriter<span class="p">,</span> r <span class="o">*</span>http.Request<span class="p">)</span> <span class="p">{</span>
+    fmt.Fprintf<span class="p">(</span>w<span class="p">,</span> <span class="s">&quot;Starting CPU burn\n&quot;</span><span class="p">)</span>
+    burnCpu <span class="o">&lt;-</span> true
+<span class="p">}</span>
+
+func stopCpu<span class="p">(</span>w http.ResponseWriter<span class="p">,</span> r <span class="o">*</span>http.Request<span class="p">)</span> <span class="p">{</span>
+    fmt.Fprintf<span class="p">(</span>w<span class="p">,</span> <span class="s">&quot;Stopping CPU burn\n&quot;</span><span class="p">)</span>
+    burnCpu <span class="o">&lt;-</span> false
+<span class="p">}</span>
+
+func main<span class="p">()</span> <span class="p">{</span>
+    go cpuBurn<span class="p">()</span>
+    http.HandleFunc<span class="p">(</span><span class="s">&quot;/start_cpu&quot;</span><span class="p">,</span> startCpu<span class="p">)</span>
+    http.HandleFunc<span class="p">(</span><span class="s">&quot;/stop_cpu&quot;</span><span class="p">,</span> stopCpu<span class="p">)</span>
+    http.ListenAndServe<span class="p">(</span><span class="s">&quot;:8080&quot;</span><span class="p">,</span> nil<span class="p">)</span>
+<span class="p">}</span>
+</pre></div><p>View <a href="./dependency-less-rest-cpu-burner-in-go.html#disqus_thread">comments</a>.</p>            </article>
+                <section id="article-list">
+                    <h2>All posts</h2>
+                    <ol>
+        
+
+ 
+            <li><a href="./openstack-development-with-vagrant-and-pycharm.html" rel="bookmark" title="Permalink to OpenStack development with Vagrant and PyCharm">OpenStack development with Vagrant and PyCharm</a></li>
+    </ol>
+    </section><!-- #article-list -->
 
     <script type="text/javascript">
     var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
