@@ -32,81 +32,16 @@
           </ul>
         </div>
 <a href=".">blog</a> | <a href="./about">about</a></header>
-        
-        
+<section id="content" class="body">
+<!--<h1>Archives for Nejc Saje</h1>-->
 
-            <header>
-                <h1><a href="./dependency-less-rest-cpu-burner-in-go.html" id="page-title">Dependency-less REST CPU burner in Go</a></h1>
-<time datetime="2013-12-31T10:20:00">Tue 31 December 2013</time>            </header>
-
-            <article>
-                <p>Disclaimer: not really REST, but writing HTTP-controlled made the title too long.</p>
-<h2>TL;DR</h2>
-<p>When compiled with <code>CGO_ENABLED=0</code>, this code produces a static binary file that can be uploaded to a server and run.
-CPU burn can be started by requesting <code>/start_cpu</code> and stopped by requesting <code>/stop_cpu</code>.</p>
-<h2>Long version</h2>
-<p>Recently I had to implement an integration test in which I had to fire up a virtual machine and control its CPU load. The first idea was to write a simple Python web service, so I could control the CPU load via HTTP requests. The testing was being done on devstack though, and its test VM image is that of <a href="https://launchpad.net/cirros">CirrOS</a>, which only includes Busybox and no Python.</p>
-<p>So I needed a static binary I could just <code>scp</code> on the VM and run. <a href="http://golang.org">Go</a> turned out to be the answer to my problem. Even though I never programmed in Go before, I soon had a working HTTP-controlled staticly linked web service. To achieve static linking, the compiler and the code needs to be compiled with environment variable <code>CGO_ENABLED=0</code> (<a href="https://groups.google.com/forum/#!topic/golang-nuts/Rw89bnhPBUI">issue</a>).</p>
-<h3>Cross compilation</h3>
-<p>On top of that, Go allowed me to easily cross-compile a Linux binary on OSX just by (quickly) recompiling Go compiler with Linux support</p>
-<div class="highlight"><pre><span class="n">cd</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">go</span><span class="o">/</span><span class="n">src</span>
-<span class="n">sudo</span> <span class="n">GOOS</span><span class="o">=</span><span class="n">linux</span> <span class="n">GOARCH</span><span class="o">=</span><span class="mi">386</span> <span class="n">CGO_ENABLED</span><span class="o">=</span><span class="mi">0</span> <span class="p">.</span><span class="o">/</span><span class="n">make</span><span class="p">.</span><span class="n">bash</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">clean</span>
-</pre></div>
-
-
-<p>and then compiling my code with additional options <code>GOOS=linux GOARCH=386</code>.
-Other platforms are similar, for more information take a look at <a href="http://dave.cheney.net/2012/09/08/an-introduction-to-cross-compilation-with-go">An introduction to cross compilation with Go</a>.</p>
-<div class="highlight"><pre>package main
-
-import <span class="p">(</span>
-    <span class="s">&quot;fmt&quot;</span>
-    <span class="s">&quot;net/http&quot;</span>
-    <span class="s">&quot;time&quot;</span>
-<span class="p">)</span>
-
-var burnCpu <span class="o">=</span> make<span class="p">(</span>chan bool<span class="p">)</span>
-
-func cpuBurn<span class="p">()</span> <span class="p">{</span>
-    var burn bool <span class="o">=</span> false
-    <span class="kr">for</span> <span class="p">{</span>
-        select <span class="p">{</span>
-        case burn <span class="o">=</span> <span class="o">&lt;-</span>burnCpu<span class="o">:</span>
-        default<span class="o">:</span>
-            <span class="kr">if</span> burn <span class="p">{</span>
-                _ <span class="o">=</span> <span class="m">5</span><span class="o">*</span><span class="m">5</span>
-            <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
-                time.Sleep<span class="p">(</span><span class="m">100</span> <span class="o">*</span> time.Millisecond<span class="p">)</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-func startCpu<span class="p">(</span>w http.ResponseWriter<span class="p">,</span> r <span class="o">*</span>http.Request<span class="p">)</span> <span class="p">{</span>
-    fmt.Fprintf<span class="p">(</span>w<span class="p">,</span> <span class="s">&quot;Starting CPU burn\n&quot;</span><span class="p">)</span>
-    burnCpu <span class="o">&lt;-</span> true
-<span class="p">}</span>
-
-func stopCpu<span class="p">(</span>w http.ResponseWriter<span class="p">,</span> r <span class="o">*</span>http.Request<span class="p">)</span> <span class="p">{</span>
-    fmt.Fprintf<span class="p">(</span>w<span class="p">,</span> <span class="s">&quot;Stopping CPU burn\n&quot;</span><span class="p">)</span>
-    burnCpu <span class="o">&lt;-</span> false
-<span class="p">}</span>
-
-func main<span class="p">()</span> <span class="p">{</span>
-    go cpuBurn<span class="p">()</span>
-    http.HandleFunc<span class="p">(</span><span class="s">&quot;/start_cpu&quot;</span><span class="p">,</span> startCpu<span class="p">)</span>
-    http.HandleFunc<span class="p">(</span><span class="s">&quot;/stop_cpu&quot;</span><span class="p">,</span> stopCpu<span class="p">)</span>
-    http.ListenAndServe<span class="p">(</span><span class="s">&quot;:8080&quot;</span><span class="p">,</span> nil<span class="p">)</span>
-<span class="p">}</span>
-</pre></div><p>View <a href="./dependency-less-rest-cpu-burner-in-go.html#disqus_thread">comments</a>.</p>            </article>
-                <section id="article-list">
-                    <h2>All posts</h2>
-                    <ol>
-        
-
- 
-            <li><a href="./openstack-development-with-vagrant-and-pycharm.html" rel="bookmark" title="Permalink to OpenStack development with Vagrant and PyCharm">OpenStack development with Vagrant and PyCharm</a></li>
-    </ol>
-    </section><!-- #article-list -->
+<dl>
+    <dt>Fri 24 January 2014</dt>
+    <dd><a href='./dependency-less-rest-cpu-burner-in-go.html'>Dependency-less REST CPU burner in Go</a></dd>
+    <dt>Fri 15 November 2013</dt>
+    <dd><a href='./openstack-development-with-vagrant-and-pycharm.html'>OpenStack development with Vagrant and PyCharm</a></dd>
+</dl>
+</section>
 
     <script type="text/javascript">
     var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
