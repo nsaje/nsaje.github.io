@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>Nejc Saje - development</title>
+        <title>Nejc Saje - beginner</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
         <link href="../" type="application/atom+xml" rel="alternate" title="Nejc Saje ATOM Feed" />
@@ -37,26 +37,19 @@
 
 <ol id="post-list">
         <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="../diving-into-openstack.html" rel="bookmark" title="Permalink to Diving into OpenStack development for fun and profit">Diving into OpenStack development for fun and profit</a></h2> </header>
+                <header> <h2 class="entry-title"><a href="../getting-started-with-openstack-development.html" rel="bookmark" title="Permalink to Getting started with OpenStack development">Getting started with OpenStack development</a></h2> </header>
                 <footer class="post-info">
-                    <abbr class="published" title="2014-08-12T21:10:00"> Tue 12 August 2014 </abbr>
+                    <abbr class="published" title="2014-03-18T10:20:00"> Tue 18 March 2014 </abbr>
 <address class="vcard author">By <a class="url fn" href="../author/nejc-saje.html">Nejc Saje</a></address>                </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>When Gregor Pipan from XLAB called me into his office one day last year and told me that he needed someone to work on OpenStack, I had never heard of that name before. But I said yes and here I am a little over a year later: two OpenStack summits ...</p> </div><!-- /.entry-content -->
-        </article></li>
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="../openstack-development-with-vagrant-and-pycharm.html" rel="bookmark" title="Permalink to OpenStack development with Vagrant and PyCharm">OpenStack development with Vagrant and PyCharm</a></h2> </header>
-                <footer class="post-info">
-                    <abbr class="published" title="2013-11-15T10:20:00"> Fri 15 November 2013 </abbr>
-<address class="vcard author">By <a class="url fn" href="../author/nejc-saje.html">Nejc Saje</a></address>                </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>Up until now, my OpenStack development setup looked like this:</p>
-<ul>
-<li>devstack running in a VM,</li>
-<li>developing using tmux &amp; vim over SSH.</li>
-</ul>
-<p>Since I was hearing good things about PyCharm, I decided to give it a try. The idea of the setup is as follows:</p>
-<ul>
-<li>devstack running in a VM,</li>
-<li>developing ...</li></ul> </div><!-- /.entry-content -->
+                <div class="entry-content"> <p>First, read <a href="Gerrit%20Workflow">https://wiki.openstack.org/wiki/GerritWorkflow</a></p>
+<p>Run simple unit tests</p>
+<div class="highlight"><pre><span class="n">nosetests</span>
+</pre></div>
+
+
+<p>Non-obvious problem with running <code>tox</code></p>
+<div class="highlight"><pre><span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="p">.</span><span class="n">tox</span>
+</pre></div> </div><!-- /.entry-content -->
         </article></li>
 </ol><!-- /#posts-list -->
 </section><!-- /#content -->
