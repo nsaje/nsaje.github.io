@@ -1,0 +1,65 @@
+==================================================================
+https://keybase.io/nsaje
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://nejc.saje.info
+  * I am nsaje (https://keybase.io/nsaje) on keybase.
+  * I have a public key with fingerprint 067B 6773 994F F2F6 B4D9  35B5 5835 8E99 1A9D 7CB0
+
+To claim this, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "067b6773994ff2f6b4d935b558358e991a9d7cb0",
+            "host": "keybase.io",
+            "key_id": "58358e991a9d7cb0",
+            "uid": "e135bf615bc2554466ecd3feafe7f200",
+            "username": "nsaje"
+        },
+        "service": {
+            "hostname": "nejc.saje.info",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1411416207,
+    "expire_in": 157680000,
+    "prev": "4e1264dfd3e663f21a0f45cfb0e46effdec3270dd6e70e374e1f91a5643a9193",
+    "seqno": 5,
+    "tag": "signature"
+}
+
+with the aforementioned key, yielding the PGP signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG/MacGPG2 v2.0.22 (Darwin)
+Comment: GPGTools - https://gpgtools.org
+
+owGbwMvMwMUYYdo3U2puzQbG0wc+JjGEKDRMq1ZKyk+pVLKqVspOBVNpmXnpqUUF
+RZl5JUpWSgZm5klm5ubGlpYmaWlGaWZJJimWxqZJpqYWxqYWqZaWhomWKebJSQZK
+OkoZ+cUgHUBjkhKLU/Uy84FiQE58ZgpQFIv6UrBEqiHQuDQzQ9OkZCNTUxMTM7PU
+5BTjtNTEtFTzNCMDsMLi1KK8xNxUoOq84sSsVKVaHSWgUFlmcirIwSB7YdKpWcl6
+ICV6mXlpIPsLivJL8pPzc4ByGSUlBVYgrSWVBSC15alJ8VBT4pMy81KA3gZqKEst
+Ks7Mz1OyMgSqTC7JBBlraGIIRGZGBuY6SqkVBZlFqfGZIBWm5mYWBkAAsia1DGik
+SaqhkZlJSlqKcaqZmXGakWGiQZqJaXJakkGqiVlqWlpKarKxkblBSopZqrlBqrE5
+UH0aMERMzUyMEy0NLY2VQP4qzMtXsjIFOjMxHWhkcWZ6XmJJaRHQ01ydjDIsDIxc
+DGysTKCYY+DiFIDF547rHAxrYrZNvWzb8SPr4qKkwAOGzKZzHTh2L8yf/lJXkCvA
+zzjtgN7q/B7dyX8O95WsVHjr6D6VWfXGCb7zpfbfF/HqWV2VLj46oaG9ceOcR41a
+l+Smll5bnBh9vbJtcXSl8A8hqzXrnh9mrUiY8XY1j5Zl4Of9S1z6ps9lmmbSfopd
+VL/3oQYby77nGnIu6xLEqy9E1RtPMqtjDhbZOsVCJ+lU9P0Jt+rda6dML3lfuO2J
+ft3TnLqZQZc79lwT7Tt32LOnQ2XK8Ue92+StN/xnK/JNiGIL3Hdv96/WU4pWCZvk
+m69vuGEu0c4+q/fYv8e3b/H6/vz5ieNF/6GN4cmyXjI/tVKN01tEtp4wzTcLqgUA
+=B/gy
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/nsaje
+
+==================================================================
+
