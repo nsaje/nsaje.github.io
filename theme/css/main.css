@@ -11,6 +11,10 @@
 /* line 13, ../../compass/src/main.scss */
 
 /* nsaje modifications */
+.float-right {
+    float: right;
+    padding: 1em;
+}
 
 code {
   background-color: #fafafa;

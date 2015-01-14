@@ -35,7 +35,7 @@
         
 <header>
     <h1><a href="./dependency-less-rest-cpu-burner-in-go.html" id="page-title">Dependency-less REST CPU burner in Go</a></h1>
-<time datetime="2014-01-24T08:40:00">Fri 24 January 2014</time></header>
+<time datetime="2014-01-24T08:40:00+01:00">Fri 24 January 2014</time></header>
 <article>
     <p>Disclaimer: not really REST, but writing HTTP-controlled made the title too long.</p>
 <h2>TL;DR</h2>
@@ -46,53 +46,53 @@ CPU burn can be started by requesting <code>/start_cpu</code> and stopped by req
 <p>So I needed a static binary I could just <code>scp</code> on the VM and run. <a href="http://golang.org">Go</a> turned out to be the answer to my problem. Even though I never programmed in Go before, I soon had a working HTTP-controlled staticly linked web service. To achieve static linking, the compiler and the code needs to be compiled with environment variable <code>CGO_ENABLED=0</code> (<a href="https://groups.google.com/forum/#!topic/golang-nuts/Rw89bnhPBUI">issue</a>).</p>
 <h3>Cross compilation</h3>
 <p>On top of that, Go allowed me to easily cross-compile a Linux binary on OSX just by (quickly) recompiling Go compiler with Linux support</p>
-<div class="highlight"><pre><span class="n">cd</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">go</span><span class="o">/</span><span class="n">src</span>
-<span class="n">sudo</span> <span class="n">GOOS</span><span class="o">=</span><span class="n">linux</span> <span class="n">GOARCH</span><span class="o">=</span><span class="mi">386</span> <span class="n">CGO_ENABLED</span><span class="o">=</span><span class="mi">0</span> <span class="p">.</span><span class="o">/</span><span class="n">make</span><span class="p">.</span><span class="n">bash</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">clean</span>
+<div class="highlight"><pre>cd /usr/local/go/src
+sudo GOOS=linux GOARCH=386 CGO_ENABLED=0 ./make.bash --no-clean
 </pre></div>
 
 
 <p>and then compiling my code with additional options <code>GOOS=linux GOARCH=386</code>.
 Other platforms are similar, for more information take a look at <a href="http://dave.cheney.net/2012/09/08/an-introduction-to-cross-compilation-with-go">An introduction to cross compilation with Go</a>.</p>
-<div class="highlight"><pre>package main
+<div class="highlight"><pre><span class="n">package</span> <span class="n">main</span>
 
-import <span class="p">(</span>
+<span class="kn">import</span> <span class="p">(</span>
     <span class="s">&quot;fmt&quot;</span>
     <span class="s">&quot;net/http&quot;</span>
     <span class="s">&quot;time&quot;</span>
 <span class="p">)</span>
 
-var burnCpu <span class="o">=</span> make<span class="p">(</span>chan bool<span class="p">)</span>
+<span class="n">var</span> <span class="n">burnCpu</span> <span class="o">=</span> <span class="n">make</span><span class="p">(</span><span class="n">chan</span> <span class="nb">bool</span><span class="p">)</span>
 
-func cpuBurn<span class="p">()</span> <span class="p">{</span>
-    var burn bool <span class="o">=</span> false
-    <span class="kr">for</span> <span class="p">{</span>
-        select <span class="p">{</span>
-        case burn <span class="o">=</span> <span class="o">&lt;-</span>burnCpu<span class="o">:</span>
-        default<span class="o">:</span>
-            <span class="kr">if</span> burn <span class="p">{</span>
-                _ <span class="o">=</span> <span class="m">5</span><span class="o">*</span><span class="m">5</span>
-            <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
-                time.Sleep<span class="p">(</span><span class="m">100</span> <span class="o">*</span> time.Millisecond<span class="p">)</span>
+<span class="n">func</span> <span class="n">cpuBurn</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">var</span> <span class="n">burn</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">false</span>
+    <span class="k">for</span> <span class="p">{</span>
+        <span class="n">select</span> <span class="p">{</span>
+        <span class="n">case</span> <span class="n">burn</span> <span class="o">=</span> <span class="o">&lt;-</span><span class="n">burnCpu</span><span class="p">:</span>
+        <span class="n">default</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">burn</span> <span class="p">{</span>
+                <span class="n">_</span> <span class="o">=</span> <span class="mi">5</span><span class="o">*</span><span class="mi">5</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">Sleep</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="n">time</span><span class="o">.</span><span class="n">Millisecond</span><span class="p">)</span>
             <span class="p">}</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
-func startCpu<span class="p">(</span>w http.ResponseWriter<span class="p">,</span> r <span class="o">*</span>http.Request<span class="p">)</span> <span class="p">{</span>
-    fmt.Fprintf<span class="p">(</span>w<span class="p">,</span> <span class="s">&quot;Starting CPU burn\n&quot;</span><span class="p">)</span>
-    burnCpu <span class="o">&lt;-</span> true
+<span class="n">func</span> <span class="n">startCpu</span><span class="p">(</span><span class="n">w</span> <span class="n">http</span><span class="o">.</span><span class="n">ResponseWriter</span><span class="p">,</span> <span class="n">r</span> <span class="o">*</span><span class="n">http</span><span class="o">.</span><span class="n">Request</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Fprintf</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="s">&quot;Starting CPU burn</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+    <span class="n">burnCpu</span> <span class="o">&lt;-</span> <span class="n">true</span>
 <span class="p">}</span>
 
-func stopCpu<span class="p">(</span>w http.ResponseWriter<span class="p">,</span> r <span class="o">*</span>http.Request<span class="p">)</span> <span class="p">{</span>
-    fmt.Fprintf<span class="p">(</span>w<span class="p">,</span> <span class="s">&quot;Stopping CPU burn\n&quot;</span><span class="p">)</span>
-    burnCpu <span class="o">&lt;-</span> false
+<span class="n">func</span> <span class="n">stopCpu</span><span class="p">(</span><span class="n">w</span> <span class="n">http</span><span class="o">.</span><span class="n">ResponseWriter</span><span class="p">,</span> <span class="n">r</span> <span class="o">*</span><span class="n">http</span><span class="o">.</span><span class="n">Request</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Fprintf</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="s">&quot;Stopping CPU burn</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+    <span class="n">burnCpu</span> <span class="o">&lt;-</span> <span class="n">false</span>
 <span class="p">}</span>
 
-func main<span class="p">()</span> <span class="p">{</span>
-    go cpuBurn<span class="p">()</span>
-    http.HandleFunc<span class="p">(</span><span class="s">&quot;/start_cpu&quot;</span><span class="p">,</span> startCpu<span class="p">)</span>
-    http.HandleFunc<span class="p">(</span><span class="s">&quot;/stop_cpu&quot;</span><span class="p">,</span> stopCpu<span class="p">)</span>
-    http.ListenAndServe<span class="p">(</span><span class="s">&quot;:8080&quot;</span><span class="p">,</span> nil<span class="p">)</span>
+<span class="n">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">go</span> <span class="n">cpuBurn</span><span class="p">()</span>
+    <span class="n">http</span><span class="o">.</span><span class="n">HandleFunc</span><span class="p">(</span><span class="s">&quot;/start_cpu&quot;</span><span class="p">,</span> <span class="n">startCpu</span><span class="p">)</span>
+    <span class="n">http</span><span class="o">.</span><span class="n">HandleFunc</span><span class="p">(</span><span class="s">&quot;/stop_cpu&quot;</span><span class="p">,</span> <span class="n">stopCpu</span><span class="p">)</span>
+    <span class="n">http</span><span class="o">.</span><span class="n">ListenAndServe</span><span class="p">(</span><span class="s">&quot;:8080&quot;</span><span class="p">,</span> <span class="n">nil</span><span class="p">)</span>
 <span class="p">}</span>
 </pre></div>
 </article>

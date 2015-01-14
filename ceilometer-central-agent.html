@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>Nejc Saje : Ceilometer Central Agent horizontal scaling</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+        <link href="./" type="application/atom+xml" rel="alternate" title="Nejc Saje ATOM Feed" />
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="./css/ie.css"/>
+                <script src="./js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="./css/ie6.css"/><![endif]-->
+    <meta name="google-site-verification" content="iyShpGGQFM1qwTkdPIfkCifWJGSQCXLImZNTO729X-s" />
+</head>
+
+<body>
+<header><h1><a href="." id="site-title">Nejc Saje </a>
+&nbsp;&nbsp;
+            <a href="https://twitter.com/NejcSaje"><i class="fa fa-twitter-square" style="color: #1f334b"></i></a>
+            <a href="http://www.github.com/nsaje"><i class="fa fa-github-square" style="color: #1f334b"></i></a>
+            <a href="http://si.linkedin.com/pub/nejc-saje/23/3a3/9b0/"><i class="fa fa-linkedin-square" style="color: #1f334b"></i></a>
+            <a href="http://nsaje.si/feeds/all.atom.xml"><i class="fa fa-rss-square" style="color: #1f334b"></i></a>
+</h1>
+
+          </ul>
+        </div>
+<a href=".">blog</a> | <a href="./about">about</a></header>
+        
+<header>
+    <h1><a href="./ceilometer-central-agent.html" id="page-title">Ceilometer Central Agent horizontal scaling</a></h1>
+<time datetime="2015-01-14T11:04:00+01:00">Wed 14 January 2015</time></header>
+<article>
+    <!-- target audience: OpenStack developers, operators
+main point: how Ceilometer central agent workload partitioning works
+sub points: group membership, hash rings -->
+<div class="float-right container">
+<img alt="Red Hat logo" src="images/RedHat.svg.png" style="width: 10em;" />
+</div>
+<p>This post is about some of the work I did on the Ceilometer's Central Agent while working at Red Hat in the summer of 2014.</p>
+<p>Ceilometer's Central Agent's job is polling. It polls VMs/resources/services/sensors... about their status or value.</p>
+<img alt="Single Central Agent" src="images/single.png" style="width: 600px;" />
+<p>But you don't want to have one Central Agent be the single point of failure, or perhaps you have so many resources that a single agent can't even handle them all in time. If you simply run another agent, they'll both poll everything and you'll get duplicate samples.</p>
+<img alt="Duplicated polling" src="images/duplicate.png" style="width: 600px;" />
+<p>So in the Juno cycle, we set out to fix this by enabling Central Agents to figure out among themselves who polls what.</p>
+<p>We could elect a leader among the running agents, which would then distribute the work among the group. The problem arises when a new agent is started or one of the agents fails. The leader has to reassign the work then, which comprises of taking some resources off some agents and assigning them to others, which can get complicated and error-prone very quickly.</p>
+<p>Instead, we chose the simpler route by minimizing the amount of coordination between agents. All each agent needs in order to decide what to poll is the information about how many and which other Central Agents are currently up and running. Using that information it can then use a hash function to see if a particular resource is assigned to it or not.</p>
+<div class="section" id="solution">
+<h2>Solution</h2>
+<p>From a high level perspective, we have a set of resources (items)  which need to be polled by a set of agents (buckets). We then use hashing to compartmentalize the items (resources) into buckets (agents).</p>
+<img alt="Hashing resources into buckets" src="images/hashing.png" style="width: 600px;" />
+<p>Each agent can do the hashing procedure by itself and so figures out which resources it needs to poll. All it needs for that is the information about which other Central Agents are currently up and running.</p>
+<img alt="Partitioned resources" src="images/partitioned.png" style="width: 600px;" />
+<p>For more details about the design and implementation, see <a class="reference external" href="https://github.com/openstack/ceilometer-specs/blob/master/specs/juno/central-agent-partitioning.rst">the blueprint</a> and Eoghan Glynn's <a class="reference external" href="http://www.slideshare.net/EoghanGlynn/hash-based-central-agent-workload-partitioning-37760440">short presentation slides</a>.</p>
+</div>
+
+</article>
+<footer>
+    <nav>
+        <ul>
+            <li><a href="./"></a> ::</li>
+            <li><a href="./pages/blog.html">Blog</a></li>
+            <li>:: <a href="./categories.html">Categories</a></li>
+            <li>:: <a href="./tags.html">Tags</a></li>
+        </ul>
+    </nav>
+    <p id="theme-credit"><a href="http://mathieu.agopian.info/mnmlist/theme.html">Thème mnmlist</a></p>
+</footer><div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'nsajeblog'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-5535381-2");
+    pageTracker._trackPageview();
+    } catch(err) {}</script>
+</body>
+</html>
