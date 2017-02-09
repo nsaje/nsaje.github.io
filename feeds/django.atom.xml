@@ -1,19 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Nejc Saje</title><link href="http://nejc.saje.info/" rel="alternate"></link><link href="http://nejc.saje.info/feeds/django.atom.xml" rel="self"></link><id>http://nejc.saje.info/</id><updated>2016-12-28T10:26:00+01:00</updated><entry><title>Python Copy-On-Write Object</title><link href="http://nejc.saje.info/python-copy-on-write.html" rel="alternate"></link><updated>2016-12-28T10:26:00+01:00</updated><author><name>Nejc Saje</name></author><id>tag:nejc.saje.info,2016-12-28:python-copy-on-write.html</id><summary type="html">&lt;p&gt;Let's say you want to track the history of changes made to your Django
-models. We can achieve this with a mixin that creates a snapshot of the
-object when the object is created:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;HistoryMixin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;snapshot&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; 
-
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;snapshot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-        &lt;span class="c1"&gt;# store the snapshot of the properties you want to keep history of&lt;/span&gt;
-        &lt;span class="k"&gt;pass&lt;/span&gt;
-
-
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MyModel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;HistoryMixin&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="python"></category><category term="django"></category><category term="copy-on-write"></category></entry><entry><title>Django PostgreSQL Read-Only Connection</title><link href="http://nejc.saje.info/django-postgresql-readonly.html" rel="alternate"></link><updated>2016-08-11T10:20:00+02:00</updated><author><name>Nejc Saje</name></author><id>tag:nejc.saje.info,2016-08-11:django-postgresql-readonly.html</id><summary type="html">&lt;p&gt;A while ago I was in a situation where I had to perform some alterations
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Nejc Saje</title><link href="http://nejc.saje.info/" rel="alternate"></link><link href="http://nejc.saje.info/feeds/django.atom.xml" rel="self"></link><id>http://nejc.saje.info/</id><updated>2016-08-11T10:20:00+02:00</updated><entry><title>Django PostgreSQL Read-Only Connection</title><link href="http://nejc.saje.info/django-postgresql-readonly.html" rel="alternate"></link><updated>2016-08-11T10:20:00+02:00</updated><author><name>Nejc Saje</name></author><id>tag:nejc.saje.info,2016-08-11:django-postgresql-readonly.html</id><summary type="html">&lt;p&gt;A while ago I was in a situation where I had to perform some alterations
 on Django ORM objects and dump the modified objects to a JSON file. But
 I also had to make sure that the changes I performed did not get saved
 into the original database. &lt;/p&gt;
