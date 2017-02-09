@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Nejc Saje</title><link href="http://nejc.saje.info/" rel="alternate"></link><link href="http://nejc.saje.info/feeds/general.atom.xml" rel="self"></link><id>http://nejc.saje.info/</id><updated>2017-02-08T08:20:00+01:00</updated><entry><title>Best Colorscheme For The Eyes</title><link href="http://nejc.saje.info/best-colorscheme-for-the-eyes.html" rel="alternate"></link><updated>2017-02-08T08:20:00+01:00</updated><author><name>Nejc Saje</name></author><id>tag:nejc.saje.info,2017-02-08:best-colorscheme-for-the-eyes.html</id><summary type="html">&lt;p&gt;From time to time the coworkers who stop by my desk ask me something
+along the lines of "Is that a yellow background? How can your eyes stand
+that, isn't light text on a dark background better for the eyes?"&lt;/p&gt;
+&lt;p&gt;&lt;img src='images/colorscheme.png' style="width: 750px;"/&gt;&lt;/p&gt;
+&lt;p&gt;That is a common misconception among programmers, myself included until
+a few years back. I reasoned that since light text on a dark background
+emits less light overall, it must be easier on the eyes. But that is not
+actually the case, as is wonderfuly explained in this &lt;a href="http://ux.stackexchange.com/a/53268"&gt;UX StackExchange
+answer&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;span style='font-family: Arial,"Helvetica Neue",Helvetica,sans-serif'&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;There has been a lot of research on this topic since the 1980s and a lot
+of it still holds true today. One study from the 1980s states this:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;However, most studies have shown that &lt;strong&gt;dark characters on a light
+background are superior to light characters on a dark background (when
+the refresh rate is fairly high)&lt;/strong&gt;. For example, Bauer and Cavonius
+(1980) found that participants were 26% more accurate in reading text
+when they read it with dark characters on a light background.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Reference: Bauer, D., &amp;amp; Cavonius, C., R. (1980). Improving the
+legibility of visual display units through contrast reversal. In E.
+Grandjean, E. Vigliani (Eds.), Ergonomic Aspects of Visual Display
+Terminals (pp. 137-142). London: Taylor &amp;amp; Francis&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The reason why this matters is because of focus. As this article on
+UXMovement states, "white stimulates all three types of color sensitive
+visual receptors in the human eye in nearly equal amounts." It causes the
+eye to focus by tightening the iris. Since the eye is focused, dark
+letter forms on light backgrounds are easier to read. When using a dark
+background with strong light letter forms, the iris opens to allow more
+light in, but that causes letter forms to blur. Why?&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;People with astigmatism (approximately 50% of the population) find it
+harder to read white text on black than black text on white. Part of
+this has to do with light levels: &lt;strong&gt;with a bright display (white
+background) the iris closes a bit more, decreasing the effect of the
+"deformed" lens; with a dark display (black background) the iris opens
+to receive more light and the deformation of the lens creates a much
+fuzzier focus at the eye.&lt;/strong&gt; &lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Jason Harrison – Post Doctoral Fellow, Imager Lab Manager – Sensory
+Perception and Interaction Research Group, University of British
+Columbia&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Now there seem to be varying factors into contrast and legibility. Room
+ambient lighting. Brightness of the monitor. Also you can mitigate the
+straining effects of white (#FFF) on black (#000) by simply lessening the
+contrast like using a light gray (#EEE, #DDD, #CCC) on a dark background
+(#111, #222). &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;The last paragraph mentions that white on black can indeed be a bit
+straining on the eyes. I use &lt;a href="http://ethanschoonover.com/solarized"&gt;Solarized
+Light&lt;/a&gt;, a color scheme with just the
+right amount of contrast for best legibility and a background with reduced
+blue light content compared to a white background. And yes, it's yellow.&lt;/p&gt;</summary><category term="programming"></category><category term="colorscheme"></category><category term="color"></category><category term="background"></category><category term="solarized"></category><category term="contrast"></category></entry></feed>
