@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Snakeviz Online</title>
+</head>
+
+<body>
+    Select Python 2.7 profile to upload:
+    <input type="file" name="file" id="file">
+
+    <form id="py27" action="https://od6p71l6m8.execute-api.us-east-1.amazonaws.com/prod/snakeviz-27" method="POST">
+        <input type="hidden" id="py27-pstats-base64" name="pstats" />
+    </form>
+<script>
+    function handleFileSelect(evt) {
+        var file = evt.target.files[0]; // FileList object
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var pstatsBase64 = e.target.result.split(",")[1];
+            document.getElementById("py27-pstats-base64").value = pstatsBase64;
+            document.getElementById("py27").submit();
+        };
+        reader.readAsDataURL(file);
+    }
+
+    document.getElementById('file').addEventListener('change', handleFileSelect, false);
+</script>
+</body>
+</html>
