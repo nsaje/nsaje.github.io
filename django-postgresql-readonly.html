@@ -23,19 +23,18 @@
 <body>
 <header><h1><a href="." id="site-title">Nejc Saje </a>
 &nbsp;&nbsp;
-            <a href="https://twitter.com/NejcSaje"><i class="fa fa-twitter-square" style="color: #1f334b"></i></a>
             <a href="https://www.github.com/nsaje"><i class="fa fa-github-square" style="color: #1f334b"></i></a>
             <a href="https://si.linkedin.com/in/nsaje"><i class="fa fa-linkedin-square" style="color: #1f334b"></i></a>
-            <a href="http://nejc.saje.info/feeds/all.atom.xml"><i class="fa fa-rss-square" style="color: #1f334b"></i></a>
 </h1>
 
           </ul>
         </div>
-<a href=".">blog</a> | <a href="./about">about</a></header>
+<a href="./cv">cv</a> | <a href="./blog">blog</a> | <a href="./about">about</a>
+</header>
         
 <header>
     <h1><a href="./django-postgresql-readonly.html" id="page-title">Django PostgreSQL Read-Only Connection</a></h1>
-<time datetime="2016-08-11T10:20:00">Thu 11 August 2016</time></header>
+<time datetime="2016-08-11T10:20:00+02:00">Thu 11 August 2016</time></header>
 <article>
     <p>A while ago I was in a situation where I had to perform some alterations
 on Django ORM objects and dump the modified objects to a JSON file. But
@@ -57,7 +56,7 @@ documentation</a>
 and some <a href="http://initd.org/psycopg/">Psycopg</a> and Django source code, and
 finally I managed to create a read-only connection with the following
 configuration:</p>
-<div class="highlight"><pre><span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;django.db.backends.postgresql_psycopg2&#39;</span><span class="p">,</span>
         <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="s1">&#39;mydb&#39;</span><span class="p">,</span>
@@ -69,8 +68,7 @@ configuration:</p>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>But I wanted a read-only connection in only a part of my application (in
 a single management command, in fact), so I created a decorator that
@@ -79,9 +77,9 @@ decorated function exits, the settings are reset to their original state.</p>
 <p><em>Disclaimer: only use this decorator in single-threaded applications,
 otherwise unintended parts of the application might get a read-only
 connection!</em></p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">postgres_read_only</span><span class="p">(</span><span class="n">using</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">postgres_read_only</span><span class="p">(</span><span class="n">using</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-        <span class="nd">@functools.wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
         <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
             <span class="n">db_settings</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">DATABASES</span><span class="p">[</span><span class="n">using</span><span class="p">]</span>
             <span class="n">db_options</span> <span class="o">=</span> <span class="n">db_settings</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;OPTIONS&#39;</span><span class="p">,</span> <span class="p">{})</span>
@@ -96,11 +94,10 @@ connection!</em></p>
             <span class="k">return</span> <span class="n">ret</span>
         <span class="k">return</span> <span class="n">f</span>
     <span class="k">return</span> <span class="n">decorator</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Example usage:</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.core.management.base</span> <span class="kn">import</span> <span class="n">BaseCommand</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">django.core.management.base</span> <span class="kn">import</span> <span class="n">BaseCommand</span>
 <span class="kn">import</span> <span class="nn">myapp.models</span>
 
 <span class="k">class</span> <span class="nc">Command</span><span class="p">(</span><span class="n">BaseCommand</span><span class="p">):</span>
@@ -111,13 +108,11 @@ connection!</em></p>
         <span class="n">user</span> <span class="o">=</span> <span class="n">myapp</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;X&#39;</span>
         <span class="n">user</span><span class="o">.</span><span class="n">save</span><span class="p">()</span> <span class="c1"># raises exception</span>
-</pre></div>
+</code></pre></div>
 </article>
 <footer>
     <nav>
         <ul>
-            <li><a href="./"></a> ::</li>
-            <li><a href="./pages/blog.html">Blog</a></li>
             <li>:: <a href="./categories.html">Categories</a></li>
             <li>:: <a href="./tags.html">Tags</a></li>
         </ul>

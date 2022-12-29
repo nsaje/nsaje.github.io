@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Nejc Saje</title><link href="http://nejc.saje.info/" rel="alternate"></link><link href="http://nejc.saje.info/feeds/all.atom.xml" rel="self"></link><id>http://nejc.saje.info/</id><updated>2017-02-08T08:20:00+01:00</updated><entry><title>Best Colorscheme For The Eyes</title><link href="http://nejc.saje.info/best-colorscheme-for-the-eyes.html" rel="alternate"></link><updated>2017-02-08T08:20:00+01:00</updated><author><name>Nejc Saje</name></author><id>tag:nejc.saje.info,2017-02-08:best-colorscheme-for-the-eyes.html</id><summary type="html">&lt;p&gt;From time to time the coworkers who stop by my desk ask me something
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Nejc Saje</title><link href="http://nejc.saje.info/" rel="alternate"></link><link href="http://nejc.saje.info/feeds/all.atom.xml" rel="self"></link><id>http://nejc.saje.info/</id><updated>2017-02-08T08:20:00+01:00</updated><entry><title>Best Colorscheme For The Eyes</title><link href="http://nejc.saje.info/best-colorscheme-for-the-eyes.html" rel="alternate"></link><published>2017-02-08T08:20:00+01:00</published><updated>2017-02-08T08:20:00+01:00</updated><author><name>Nejc Saje</name></author><id>tag:nejc.saje.info,2017-02-08:/best-colorscheme-for-the-eyes.html</id><summary type="html">&lt;p&gt;From time to time the coworkers who stop by my desk ask me something
+along the lines of "Is that a yellow background? How can your eyes stand
+that, isn't light text on a dark background better for the eyes?"&lt;/p&gt;
+&lt;p&gt;&lt;img src='images/colorscheme.png' style="width: 750px;"/&gt;&lt;/p&gt;
+&lt;p&gt;That is a common misconception among programmers, myself included until …&lt;/p&gt;</summary><content type="html">&lt;p&gt;From time to time the coworkers who stop by my desk ask me something
 along the lines of "Is that a yellow background? How can your eyes stand
 that, isn't light text on a dark background better for the eyes?"&lt;/p&gt;
 &lt;p&gt;&lt;img src='images/colorscheme.png' style="width: 750px;"/&gt;&lt;/p&gt;
@@ -53,7 +57,11 @@ contrast like using a light gray (#EEE, #DDD, #CCC) on a dark background
 straining on the eyes. I use &lt;a href="http://ethanschoonover.com/solarized"&gt;Solarized
 Light&lt;/a&gt;, a color scheme with just the
 right amount of contrast for best legibility and a background with reduced
-blue light content compared to a white background. And yes, it's yellow.&lt;/p&gt;</summary><category term="programming"></category><category term="colorscheme"></category><category term="color"></category><category term="background"></category><category term="solarized"></category><category term="contrast"></category></entry><entry><title>Django PostgreSQL Read-Only Connection</title><link href="http://nejc.saje.info/django-postgresql-readonly.html" rel="alternate"></link><updated>2016-08-11T10:20:00+02:00</updated><author><name>Nejc Saje</name></author><id>tag:nejc.saje.info,2016-08-11:django-postgresql-readonly.html</id><summary type="html">&lt;p&gt;A while ago I was in a situation where I had to perform some alterations
+blue light content compared to a white background. And yes, it's yellow.&lt;/p&gt;</content><category term="General"></category><category term="programming"></category><category term="colorscheme"></category><category term="color"></category><category term="background"></category><category term="solarized"></category><category term="contrast"></category></entry><entry><title>Django PostgreSQL Read-Only Connection</title><link href="http://nejc.saje.info/django-postgresql-readonly.html" rel="alternate"></link><published>2016-08-11T10:20:00+02:00</published><updated>2016-08-11T10:20:00+02:00</updated><author><name>Nejc Saje</name></author><id>tag:nejc.saje.info,2016-08-11:/django-postgresql-readonly.html</id><summary type="html">&lt;p&gt;A while ago I was in a situation where I had to perform some alterations
+on Django ORM objects and dump the modified objects to a JSON file. But
+I also had to make sure that the changes I performed did not get saved
+into the original database. &lt;/p&gt;
+&lt;p&gt;At first …&lt;/p&gt;</summary><content type="html">&lt;p&gt;A while ago I was in a situation where I had to perform some alterations
 on Django ORM objects and dump the modified objects to a JSON file. But
 I also had to make sure that the changes I performed did not get saved
 into the original database. &lt;/p&gt;
@@ -73,7 +81,7 @@ documentation&lt;/a&gt;
 and some &lt;a href="http://initd.org/psycopg/"&gt;Psycopg&lt;/a&gt; and Django source code, and
 finally I managed to create a read-only connection with the following
 configuration:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;DATABASES&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;DATABASES&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="s1"&gt;&amp;#39;default&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
         &lt;span class="s1"&gt;&amp;#39;ENGINE&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;django.db.backends.postgresql_psycopg2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
         &lt;span class="s1"&gt;&amp;#39;NAME&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;mydb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
@@ -85,8 +93,7 @@ configuration:&lt;/p&gt;
         &lt;span class="p"&gt;}&lt;/span&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;But I wanted a read-only connection in only a part of my application (in
 a single management command, in fact), so I created a decorator that
@@ -95,9 +102,9 @@ decorated function exits, the settings are reset to their original state.&lt;/p&
 &lt;p&gt;&lt;em&gt;Disclaimer: only use this decorator in single-threaded applications,
 otherwise unintended parts of the application might get a read-only
 connection!&lt;/em&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;postgres_read_only&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;using&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;default&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;postgres_read_only&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;using&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;default&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;decorator&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-        &lt;span class="nd"&gt;@functools.wraps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="nd"&gt;@functools&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wraps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;f&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
             &lt;span class="n"&gt;db_settings&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;settings&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DATABASES&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;using&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
             &lt;span class="n"&gt;db_options&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;db_settings&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setdefault&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;OPTIONS&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{})&lt;/span&gt;
@@ -112,11 +119,10 @@ connection!&lt;/em&gt;&lt;/p&gt;
             &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;ret&lt;/span&gt;
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;decorator&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Example usage:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.core.management.base&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;BaseCommand&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.core.management.base&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;BaseCommand&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;myapp.models&lt;/span&gt;
 
 &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Command&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;BaseCommand&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -127,10 +133,19 @@ connection!&lt;/em&gt;&lt;/p&gt;
         &lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;myapp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;User&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;objects&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pk&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;X&amp;#39;&lt;/span&gt;
         &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;save&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c1"&gt;# raises exception&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="python"></category><category term="django"></category><category term="postgres"></category><category term="readonly"></category><category term="read-only"></category></entry><entry><title>Ceilometer Central Agent horizontal scaling</title><link href="http://nejc.saje.info/ceilometer-central-agent.html" rel="alternate"></link><updated>2015-01-14T11:04:00+01:00</updated><author><name>Nejc Saje</name></author><id>tag:nejc.saje.info,2015-01-14:ceilometer-central-agent.html</id><summary type="html">&lt;!-- target audience: OpenStack developers, operators
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Django"></category><category term="python"></category><category term="django"></category><category term="postgres"></category><category term="readonly"></category><category term="read-only"></category></entry><entry><title>Ceilometer Central Agent horizontal scaling</title><link href="http://nejc.saje.info/ceilometer-central-agent.html" rel="alternate"></link><published>2015-01-14T11:04:00+01:00</published><updated>2015-01-14T11:04:00+01:00</updated><author><name>Nejc Saje</name></author><id>tag:nejc.saje.info,2015-01-14:/ceilometer-central-agent.html</id><summary type="html">&lt;!-- target audience: OpenStack developers, operators
 main point: how Ceilometer central agent workload partitioning works
 sub points: group membership, hash rings --&gt;
-&lt;div class="float-right container"&gt;
+&lt;div class="float-right docutils container"&gt;
+&lt;img alt="Red Hat logo" src="images/RedHat.svg.png" style="width: 10em;" /&gt;
+&lt;/div&gt;
+&lt;p&gt;This post is about some of the work I did on the Ceilometer's Central Agent while working at Red Hat in the summer of 2014.&lt;/p&gt;
+&lt;p&gt;Ceilometer's Central Agent's job is polling. It polls VMs/resources/services/sensors... about their status or value.&lt;/p&gt;
+&lt;img alt="Single Central Agent" src="images/single.png" style="width: 600px;" /&gt;
+&lt;p&gt;But you don't want to have one Central …&lt;/p&gt;</summary><content type="html">&lt;!-- target audience: OpenStack developers, operators
+main point: how Ceilometer central agent workload partitioning works
+sub points: group membership, hash rings --&gt;
+&lt;div class="float-right docutils container"&gt;
 &lt;img alt="Red Hat logo" src="images/RedHat.svg.png" style="width: 10em;" /&gt;
 &lt;/div&gt;
 &lt;p&gt;This post is about some of the work I did on the Ceilometer's Central Agent while working at Red Hat in the summer of 2014.&lt;/p&gt;
@@ -149,7 +164,7 @@ sub points: group membership, hash rings --&gt;
 &lt;img alt="Partitioned resources" src="images/partitioned.png" style="width: 600px;" /&gt;
 &lt;p&gt;For more details about the design and implementation, see &lt;a class="reference external" href="https://github.com/openstack/ceilometer-specs/blob/master/specs/juno/central-agent-partitioning.rst"&gt;the blueprint&lt;/a&gt; and Eoghan Glynn's &lt;a class="reference external" href="http://www.slideshare.net/EoghanGlynn/hash-based-central-agent-workload-partitioning-37760440"&gt;short presentation slides&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="OpenStack"></category><category term="development"></category><category term="Python"></category><category term="hash"></category><category term="ring"></category><category term="partitioning"></category></entry><entry><title>Diving into OpenStack development for fun and profit</title><link href="http://nejc.saje.info/diving-into-openstack.html" rel="alternate"></link><updated>2014-08-12T21:10:00+02:00</updated><author><name>Nejc Saje</name></author><id>tag:nejc.saje.info,2014-08-12:diving-into-openstack.html</id><summary type="html">&lt;p&gt;When Gregor Pipan from XLAB called me into his office one day last year and told me that he needed someone to work on OpenStack, I had never heard of that name before. But I said yes and here I am a little over a year later: two OpenStack summits behind me, both in Hong Kong and in Atlanta, and currently working on OpenStack for Red Hat!&lt;/p&gt;
+</content><category term="OpenStack"></category><category term="OpenStack"></category><category term="development"></category><category term="Python"></category><category term="hash"></category><category term="ring"></category><category term="partitioning"></category></entry><entry><title>Diving into OpenStack development for fun and profit</title><link href="http://nejc.saje.info/diving-into-openstack.html" rel="alternate"></link><published>2014-08-12T21:10:00+02:00</published><updated>2014-08-12T21:10:00+02:00</updated><author><name>Nejc Saje</name></author><id>tag:nejc.saje.info,2014-08-12:/diving-into-openstack.html</id><summary type="html">&lt;p&gt;When Gregor Pipan from XLAB called me into his office one day last year and told me that he needed someone to work on OpenStack, I had never heard of that name before. But I said yes and here I am a little over a year later: two OpenStack summits …&lt;/p&gt;</summary><content type="html">&lt;p&gt;When Gregor Pipan from XLAB called me into his office one day last year and told me that he needed someone to work on OpenStack, I had never heard of that name before. But I said yes and here I am a little over a year later: two OpenStack summits behind me, both in Hong Kong and in Atlanta, and currently working on OpenStack for Red Hat!&lt;/p&gt;
 &lt;div class="section" id="what-is-openstack"&gt;
 &lt;h2&gt;What is OpenStack?&lt;/h2&gt;
 &lt;p&gt;OpenStack is a free and open-source software cloud computing platform. In simple terms, you install it on a bunch of computers which then become your private cloud. You can then start, stop and manage virtual machines, virtual networks and many more things via a web or a command line interface provided by OpenStack. It was initially started as a joint project of Rackspace Hosting and NASA, but is now developed by many companies around the world.&lt;/p&gt;
@@ -192,7 +207,11 @@ sub points: group membership, hash rings --&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Get cracking, good luck and see you at the next summit!&lt;/strong&gt;&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="OpenStack"></category><category term="development"></category><category term="Python"></category></entry><entry><title>Dependency-less REST CPU burner in Go</title><link href="http://nejc.saje.info/dependency-less-rest-cpu-burner-in-go.html" rel="alternate"></link><updated>2014-01-24T08:40:00+01:00</updated><author><name>Nejc Saje</name></author><id>tag:nejc.saje.info,2014-01-24:dependency-less-rest-cpu-burner-in-go.html</id><summary type="html">&lt;p&gt;Disclaimer: not really REST, but writing HTTP-controlled made the title too long.&lt;/p&gt;
+</content><category term="OpenStack"></category><category term="OpenStack"></category><category term="development"></category><category term="Python"></category></entry><entry><title>Dependency-less REST CPU burner in Go</title><link href="http://nejc.saje.info/dependency-less-rest-cpu-burner-in-go.html" rel="alternate"></link><published>2014-01-24T08:40:00+01:00</published><updated>2014-01-24T08:40:00+01:00</updated><author><name>Nejc Saje</name></author><id>tag:nejc.saje.info,2014-01-24:/dependency-less-rest-cpu-burner-in-go.html</id><summary type="html">&lt;p&gt;Disclaimer: not really REST, but writing HTTP-controlled made the title too long.&lt;/p&gt;
+&lt;h2&gt;TL;DR&lt;/h2&gt;
+&lt;p&gt;When compiled with &lt;code&gt;CGO_ENABLED=0&lt;/code&gt;, this code produces a static binary file that can be uploaded to a server and run.
+CPU burn can be started by requesting &lt;code&gt;/start_cpu&lt;/code&gt; and stopped by requesting &lt;code&gt;/stop_cpu&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Long version …&lt;/h2&gt;</summary><content type="html">&lt;p&gt;Disclaimer: not really REST, but writing HTTP-controlled made the title too long.&lt;/p&gt;
 &lt;h2&gt;TL;DR&lt;/h2&gt;
 &lt;p&gt;When compiled with &lt;code&gt;CGO_ENABLED=0&lt;/code&gt;, this code produces a static binary file that can be uploaded to a server and run.
 CPU burn can be started by requesting &lt;code&gt;/start_cpu&lt;/code&gt; and stopped by requesting &lt;code&gt;/stop_cpu&lt;/code&gt;.&lt;/p&gt;
@@ -201,55 +220,62 @@ CPU burn can be started by requesting &lt;code&gt;/start_cpu&lt;/code&gt; and st
 &lt;p&gt;So I needed a static binary I could just &lt;code&gt;scp&lt;/code&gt; on the VM and run. &lt;a href="http://golang.org"&gt;Go&lt;/a&gt; turned out to be the answer to my problem. Even though I never programmed in Go before, I soon had a working HTTP-controlled staticly linked web service. To achieve static linking, the compiler and the code needs to be compiled with environment variable &lt;code&gt;CGO_ENABLED=0&lt;/code&gt; (&lt;a href="https://groups.google.com/forum/#!topic/golang-nuts/Rw89bnhPBUI"&gt;issue&lt;/a&gt;).&lt;/p&gt;
 &lt;h3&gt;Cross compilation&lt;/h3&gt;
 &lt;p&gt;On top of that, Go allowed me to easily cross-compile a Linux binary on OSX just by (quickly) recompiling Go compiler with Linux support&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;cd /usr/local/go/src
-sudo GOOS=linux GOARCH=386 CGO_ENABLED=0 ./make.bash --no-clean
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;local&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;go&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;src&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;GOOS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;linux&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;GOARCH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;386&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;CGO_ENABLED&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;make&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bash&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;--no-clean&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;and then compiling my code with additional options &lt;code&gt;GOOS=linux GOARCH=386&lt;/code&gt;.
 Other platforms are similar, for more information take a look at &lt;a href="http://dave.cheney.net/2012/09/08/an-introduction-to-cross-compilation-with-go"&gt;An introduction to cross compilation with Go&lt;/a&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;package&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;package&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;main&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
-    &lt;span class="s2"&gt;&amp;quot;fmt&amp;quot;&lt;/span&gt;
-    &lt;span class="s2"&gt;&amp;quot;net/http&amp;quot;&lt;/span&gt;
-    &lt;span class="s2"&gt;&amp;quot;time&amp;quot;&lt;/span&gt;
-&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;fmt&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;net/http&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;time&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-&lt;span class="n"&gt;var&lt;/span&gt; &lt;span class="n"&gt;burnCpu&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;make&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;chan&lt;/span&gt; &lt;span class="nb"&gt;bool&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="kd"&gt;var&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;burnCpu&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;make&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;chan&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;bool&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-&lt;span class="n"&gt;func&lt;/span&gt; &lt;span class="n"&gt;cpuBurn&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;var&lt;/span&gt; &lt;span class="n"&gt;burn&lt;/span&gt; &lt;span class="nb"&gt;bool&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;false&lt;/span&gt;
-    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="n"&gt;select&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="n"&gt;case&lt;/span&gt; &lt;span class="n"&gt;burn&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt;&lt;span class="n"&gt;burnCpu&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-        &lt;span class="n"&gt;default&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;burn&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-                &lt;span class="n"&gt;_&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;
-            &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-                &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Millisecond&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-            &lt;span class="p"&gt;}&lt;/span&gt;
-        &lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="kd"&gt;func&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;cpuBurn&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;burn&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;bool&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;select&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;case&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;burn&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;-&lt;/span&gt;&lt;span class="nx"&gt;burnCpu&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;burn&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="nx"&gt;_&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="nx"&gt;time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Millisecond&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-&lt;span class="n"&gt;func&lt;/span&gt; &lt;span class="n"&gt;startCpu&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ResponseWriter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Request&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;fmt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Fprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Starting CPU burn&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;burnCpu&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;true&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="kd"&gt;func&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;startCpu&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;w&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;http&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;ResponseWriter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nx"&gt;http&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Request&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nx"&gt;fmt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Fprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;w&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Starting CPU burn\n&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nx"&gt;burnCpu&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-&lt;span class="n"&gt;func&lt;/span&gt; &lt;span class="n"&gt;stopCpu&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ResponseWriter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Request&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;fmt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Fprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Stopping CPU burn&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;burnCpu&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;false&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="kd"&gt;func&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;stopCpu&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;w&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;http&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;ResponseWriter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nx"&gt;http&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Request&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nx"&gt;fmt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Fprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;w&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Stopping CPU burn\n&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nx"&gt;burnCpu&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-&lt;span class="n"&gt;func&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;go&lt;/span&gt; &lt;span class="n"&gt;cpuBurn&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-    &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;HandleFunc&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/start_cpu&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;startCpu&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;HandleFunc&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/stop_cpu&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;stopCpu&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ListenAndServe&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:8080&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="golang"></category><category term="openstack"></category><category term="cirros"></category></entry><entry><title>OpenStack development with Vagrant and PyCharm</title><link href="http://nejc.saje.info/openstack-development-with-vagrant-and-pycharm.html" rel="alternate"></link><updated>2013-11-15T10:20:00+01:00</updated><author><name>Nejc Saje</name></author><id>tag:nejc.saje.info,2013-11-15:openstack-development-with-vagrant-and-pycharm.html</id><summary type="html">&lt;p&gt;Up until now, my OpenStack development setup looked like this:&lt;/p&gt;
+&lt;span class="kd"&gt;func&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;go&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;cpuBurn&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nx"&gt;http&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;HandleFunc&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/start_cpu&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;startCpu&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nx"&gt;http&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;HandleFunc&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/stop_cpu&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;stopCpu&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nx"&gt;http&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;ListenAndServe&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;:8080&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Programming"></category><category term="golang"></category><category term="openstack"></category><category term="cirros"></category></entry><entry><title>OpenStack development with Vagrant and PyCharm</title><link href="http://nejc.saje.info/openstack-development-with-vagrant-and-pycharm.html" rel="alternate"></link><published>2013-11-15T10:20:00+01:00</published><updated>2013-11-15T10:20:00+01:00</updated><author><name>Nejc Saje</name></author><id>tag:nejc.saje.info,2013-11-15:/openstack-development-with-vagrant-and-pycharm.html</id><summary type="html">&lt;p&gt;Up until now, my OpenStack development setup looked like this:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;devstack running in a VM,&lt;/li&gt;
+&lt;li&gt;developing using tmux &amp;amp; vim over SSH.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Since I was hearing good things about PyCharm, I decided to give it a try. The idea of the setup is as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;devstack running in a VM,&lt;/li&gt;
+&lt;li&gt;developing …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;Up until now, my OpenStack development setup looked like this:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;devstack running in a VM,&lt;/li&gt;
 &lt;li&gt;developing using tmux &amp;amp; vim over SSH.&lt;/li&gt;
@@ -260,67 +286,65 @@ Other platforms are similar, for more information take a look at &lt;a href="htt
 &lt;li&gt;developing using PyCharm running locally.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;To achieve this, I used the concept of shared/synced folders. Development files are kept on the host machine, where I can use an IDE such as PyCharm for development, but are also be mounted in my devstack VM via NFS. In fact, the entire Devstack's &lt;code&gt;/opt/stack&lt;/code&gt; directory is kept on the host machine. For easy setup, I used &lt;a href="http://www.vagrantup.com"&gt;Vagrant 1.3.5&lt;/a&gt; and &lt;a href="https://www.virtualbox.org"&gt;Virtualbox 4.3.2&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Vagrant and PyCharm" src="images/vagrantpycharm.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Vagrant and PyCharm" src="images/vagrantpycharm.png"&gt;&lt;/p&gt;
 &lt;p&gt;With the help of blog posts by &lt;a href="http://terriyu.info/blog/posts/2013/07/installing-devstack-ceilometer/"&gt;Terri Yu&lt;/a&gt;, &lt;a href="http://anteaya.info/blog/2013/09/01/installing-devstack-with-vagrant/"&gt;Anita Kuno&lt;/a&gt; and many helpful tips from John Herndon of HP, I came up with this Vagrantfile (&lt;a href="https://gist.github.com/nsaje/14f72ce299f6cc1275ae/download"&gt;download&lt;/a&gt;):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;script&lt;/span&gt;&lt;span class="x"&gt; = &amp;lt;&amp;lt;SCRIPT&lt;/span&gt;
-&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="x"&gt; download required packages&lt;/span&gt;
-&lt;span class="x"&gt;apt-get update&lt;/span&gt;
-&lt;span class="x"&gt;apt-get -y install git vim-gtk libxml2-dev libxslt1-dev libpq-dev python-pip libsqlite3-dev&lt;/span&gt;
-&lt;span class="x"&gt;apt-get -y build-dep python-mysqldb&lt;/span&gt;
-&lt;span class="x"&gt;pip install git-review tox&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;$&lt;/span&gt;&lt;span class="n"&gt;script&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;SCRIPT&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="c1"&gt;# download required packages&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;install&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;git&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;vim&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;gtk&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;libxml2&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;libxslt1&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;libpq&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;libsqlite3&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;build&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dep&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mysqldb&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;pip&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;install&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;git&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;review&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;tox&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="x"&gt; download devstack&lt;/span&gt;
-&lt;span class="x"&gt;git clone git://git.openstack.org/openstack-dev/devstack&lt;/span&gt;
-&lt;span class="x"&gt;chown -R vagrant:vagrant devstack&lt;/span&gt;
+&lt;span class="c1"&gt;# download devstack&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;git&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;clone&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;git&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;git&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;openstack&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;openstack&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;devstack&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;chown&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;R&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;vagrant&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;vagrant&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;devstack&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="x"&gt; create minimal localrc&lt;/span&gt;
-&lt;span class="x"&gt;cat &amp;lt;&amp;lt;_LOCALRC &amp;gt; devstack/localrc&lt;/span&gt;
-&lt;span class="x"&gt;ADMIN_PASSWORD=password&lt;/span&gt;
-&lt;span class="x"&gt;MYSQL_PASSWORD=password&lt;/span&gt;
-&lt;span class="x"&gt;RABBIT_PASSWORD=password&lt;/span&gt;
-&lt;span class="x"&gt;SERVICE_PASSWORD=password&lt;/span&gt;
-&lt;span class="x"&gt;SERVICE_TOKEN=tokentoken&lt;/span&gt;
+&lt;span class="c1"&gt;# create minimal localrc&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;cat&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;_LOCALRC&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;devstack&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;localrc&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;ADMIN_PASSWORD&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;MYSQL_PASSWORD&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;RABBIT_PASSWORD&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;SERVICE_PASSWORD&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;SERVICE_TOKEN&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;tokentoken&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-&lt;span class="x"&gt;LOGFILE=stack.sh.log&lt;/span&gt;
-&lt;span class="x"&gt;LOGDAYS=1&lt;/span&gt;
+&lt;span class="n"&gt;LOGFILE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;stack&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;LOGDAYS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="x"&gt; data must not be inside NFS share&lt;/span&gt;
-&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="x"&gt; because devstack tries to chown directories&lt;/span&gt;
-&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="x"&gt; and NFS doesn&amp;#39;t allow it&lt;/span&gt;
-&lt;span class="x"&gt;DATA_DIR=/opt/data&lt;/span&gt;
-&lt;span class="x"&gt;_LOCALRC&lt;/span&gt;
-&lt;span class="x"&gt;SCRIPT&lt;/span&gt;
+&lt;span class="c1"&gt;# data must not be inside NFS share&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="c1"&gt;# because devstack tries to chown directories&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="c1"&gt;# and NFS doesn&amp;#39;t allow it&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;DATA_DIR&lt;/span&gt;&lt;span class="o"&gt;=/&lt;/span&gt;&lt;span class="n"&gt;opt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;_LOCALRC&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;SCRIPT&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Vagrant config&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
-&lt;span class="x"&gt;VAGRANTFILE_API_VERSION = &amp;quot;2&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;## Vagrant config&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;VAGRANTFILE_API_VERSION&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;2&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-&lt;span class="x"&gt;Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|&lt;/span&gt;
-&lt;span class="x"&gt;  config.vm.box = &amp;quot;precise64&amp;quot;&lt;/span&gt;
-&lt;span class="x"&gt;  config.vm.box_url = &amp;quot;http://files.vagrantup.com/precise64.box&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;Vagrant&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;configure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;VAGRANTFILE_API_VERSION&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;do&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;box&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;precise64&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;box_url&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;http://files.vagrantup.com/precise64.box&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-&lt;span class="x"&gt;  &lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="x"&gt; Change memory of our VM to 2048MB&lt;/span&gt;
-&lt;span class="x"&gt;  config.vm.provider :virtualbox do |vb|&lt;/span&gt;
-&lt;span class="x"&gt;    vb.customize [&amp;quot;modifyvm&amp;quot;, :id, &amp;quot;--memory&amp;quot;, &amp;quot;2048&amp;quot;]&lt;/span&gt;
-&lt;span class="x"&gt;  end&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="c1"&gt;# Change memory of our VM to 2048MB&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;provider&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;virtualbox&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;do&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;vb&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;vb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;customize&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;modifyvm&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;--memory&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;2048&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-&lt;span class="x"&gt;  &lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="x"&gt; Forward port for Horizon&lt;/span&gt;
-&lt;span class="x"&gt;  config.vm.network :forwarded_port, guest: 80, host: 8080&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="c1"&gt;# Forward port for Horizon&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;network&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;forwarded_port&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;guest&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;8080&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-&lt;span class="x"&gt;  &lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="x"&gt; Private network IP, needed for NFS&lt;/span&gt;
-&lt;span class="x"&gt;  config.vm.network :private_network, ip: &amp;quot;192.168.33.10&amp;quot;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="c1"&gt;# Private network IP, needed for NFS&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;network&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;private_network&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;ip&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;192.168.33.10&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-&lt;span class="x"&gt;  &lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="x"&gt; /opt/stack is synced with vagrant project dir over NFS&lt;/span&gt;
-&lt;span class="x"&gt;  config.vm.synced_folder &amp;quot;.&amp;quot;, &amp;quot;/opt/stack&amp;quot;, nfs: true&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="c1"&gt;# /opt/stack is synced with vagrant project dir over NFS&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;synced_folder&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/opt/stack&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;nfs&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="bp"&gt;true&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-&lt;span class="x"&gt;  config.vm.provision &amp;quot;shell&amp;quot;, inline: &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;script&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
-&lt;span class="x"&gt;end&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;provision&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;shell&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;inline&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;$&lt;/span&gt;&lt;span class="n"&gt;script&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;All you need to do to get a Devstack development environment with its &lt;code&gt;/opt/stack&lt;/code&gt; kept on the host machine is copy this Vagrantfile into your directory of choice and run&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;vagrant up
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;vagrant up
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2&gt;Setting up PyCharm&lt;/h2&gt;
 &lt;p&gt;This part is really easy, just follow the instructions at &lt;a href=""&gt;https://www.jetbrains.com/pycharm/webhelp/remote-debugging.html#5&lt;/a&gt;. Basically you just click a button that fills in your Vagrant config and voilà, you can run and debug projects on your devstack VM.&lt;/p&gt;
@@ -329,4 +353,4 @@ Other platforms are similar, for more information take a look at &lt;a href="htt
 &lt;h4&gt;1. Devstack's DATA_DIR variable mustn't reside on the NFS share&lt;/h4&gt;
 &lt;p&gt;Nova creates stuff in the data directory with root permissions and then tries to &lt;code&gt;chown&lt;/code&gt; them, which fails on the NFS share.&lt;/p&gt;
 &lt;h4&gt;2. NFS share must reside on a case-sensitive filesystem&lt;/h4&gt;
-&lt;p&gt;Unit tests for some projects require python packages that have the same name, save for the case. In my case, the problematic packages were &lt;code&gt;Crypto&lt;/code&gt; and &lt;code&gt;crypto&lt;/code&gt;.&lt;/p&gt;</summary><category term="python"></category><category term="openstack"></category><category term="devstack"></category><category term="vagrant"></category><category term="pycharm"></category><category term="remote"></category><category term="development"></category></entry></feed>
+&lt;p&gt;Unit tests for some projects require python packages that have the same name, save for the case. In my case, the problematic packages were &lt;code&gt;Crypto&lt;/code&gt; and &lt;code&gt;crypto&lt;/code&gt;.&lt;/p&gt;</content><category term="OpenStack"></category><category term="python"></category><category term="openstack"></category><category term="devstack"></category><category term="vagrant"></category><category term="pycharm"></category><category term="remote"></category><category term="development"></category></entry></feed>

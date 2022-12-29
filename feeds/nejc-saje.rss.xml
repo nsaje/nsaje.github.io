@@ -1,127 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Nejc Saje</title><link>http://nsaje.si/</link><description></description><atom:link href="http://nsaje.si/feeds/nejc-saje.rss.xml" rel="self"></atom:link><lastBuildDate>Wed, 14 Jan 2015 11:04:00 +0100</lastBuildDate><item><title>Ceilometer Central Agent horizontal scaling</title><link>http://nsaje.si/ceilometer-central-agent.html</link><description>&lt;!-- target audience: OpenStack developers, operators
+<rss version="2.0"><channel><title>Nejc Saje - Nejc Saje</title><link>http://nejc.saje.info/</link><description></description><lastBuildDate>Wed, 08 Feb 2017 08:20:00 +0100</lastBuildDate><item><title>Best Colorscheme For The Eyes</title><link>http://nejc.saje.info/best-colorscheme-for-the-eyes.html</link><description>&lt;p&gt;From time to time the coworkers who stop by my desk ask me something
+along the lines of "Is that a yellow background? How can your eyes stand
+that, isn't light text on a dark background better for the eyes?"&lt;/p&gt;
+&lt;p&gt;&lt;img src='images/colorscheme.png' style="width: 750px;"/&gt;&lt;/p&gt;
+&lt;p&gt;That is a common misconception among programmers, myself included until …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nejc Saje</dc:creator><pubDate>Wed, 08 Feb 2017 08:20:00 +0100</pubDate><guid isPermaLink="false">tag:nejc.saje.info,2017-02-08:/best-colorscheme-for-the-eyes.html</guid><category>General</category><category>programming</category><category>colorscheme</category><category>color</category><category>background</category><category>solarized</category><category>contrast</category></item><item><title>Django PostgreSQL Read-Only Connection</title><link>http://nejc.saje.info/django-postgresql-readonly.html</link><description>&lt;p&gt;A while ago I was in a situation where I had to perform some alterations
+on Django ORM objects and dump the modified objects to a JSON file. But
+I also had to make sure that the changes I performed did not get saved
+into the original database. &lt;/p&gt;
+&lt;p&gt;At first …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nejc Saje</dc:creator><pubDate>Thu, 11 Aug 2016 10:20:00 +0200</pubDate><guid isPermaLink="false">tag:nejc.saje.info,2016-08-11:/django-postgresql-readonly.html</guid><category>Django</category><category>python</category><category>django</category><category>postgres</category><category>readonly</category><category>read-only</category></item><item><title>Ceilometer Central Agent horizontal scaling</title><link>http://nejc.saje.info/ceilometer-central-agent.html</link><description>&lt;!-- target audience: OpenStack developers, operators
 main point: how Ceilometer central agent workload partitioning works
 sub points: group membership, hash rings --&gt;
-&lt;div class="float-right container"&gt;
+&lt;div class="float-right docutils container"&gt;
 &lt;img alt="Red Hat logo" src="images/RedHat.svg.png" style="width: 10em;" /&gt;
 &lt;/div&gt;
 &lt;p&gt;This post is about some of the work I did on the Ceilometer's Central Agent while working at Red Hat in the summer of 2014.&lt;/p&gt;
 &lt;p&gt;Ceilometer's Central Agent's job is polling. It polls VMs/resources/services/sensors... about their status or value.&lt;/p&gt;
 &lt;img alt="Single Central Agent" src="images/single.png" style="width: 600px;" /&gt;
-&lt;p&gt;But you don't want to have one Central Agent be the single point of failure, or perhaps you have so many resources that a single agent can't even handle them all in time. If you simply run another agent, they'll both poll everything and you'll get duplicate samples.&lt;/p&gt;
-&lt;img alt="Duplicated polling" src="images/duplicate.png" style="width: 600px;" /&gt;
-&lt;p&gt;So in the Juno cycle, we set out to fix this by enabling Central Agents to figure out among themselves who polls what.&lt;/p&gt;
-&lt;p&gt;We could elect a leader among the running agents, which would then distribute the work among the group. The problem arises when a new agent is started or one of the agents fails. The leader has to reassign the work then, which comprises of taking some resources off some agents and assigning them to others, which can get complicated and error-prone very quickly.&lt;/p&gt;
-&lt;p&gt;Instead, we chose the simpler route by minimizing the amount of coordination between agents. All each agent needs in order to decide what to poll is the information about how many and which other Central Agents are currently up and running. Using that information it can then use a hash function to see if a particular resource is assigned to it or not.&lt;/p&gt;
-&lt;div class="section" id="solution"&gt;
-&lt;h2&gt;Solution&lt;/h2&gt;
-&lt;p&gt;From a high level perspective, we have a set of resources (items)  which need to be polled by a set of agents (buckets). We then use hashing to compartmentalize the items (resources) into buckets (agents).&lt;/p&gt;
-&lt;img alt="Hashing resources into buckets" src="images/hashing.png" style="width: 600px;" /&gt;
-&lt;p&gt;Each agent can do the hashing procedure by itself and so figures out which resources it needs to poll. All it needs for that is the information about which other Central Agents are currently up and running.&lt;/p&gt;
-&lt;img alt="Partitioned resources" src="images/partitioned.png" style="width: 600px;" /&gt;
-&lt;p&gt;For more details about the design and implementation, see &lt;a class="reference external" href="https://github.com/openstack/ceilometer-specs/blob/master/specs/juno/central-agent-partitioning.rst"&gt;the blueprint&lt;/a&gt; and Eoghan Glynn's &lt;a class="reference external" href="http://www.slideshare.net/EoghanGlynn/hash-based-central-agent-workload-partitioning-37760440"&gt;short presentation slides&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nejc Saje</dc:creator><pubDate>Wed, 14 Jan 2015 11:04:00 +0100</pubDate><guid>tag:nsaje.si,2015-01-14:ceilometer-central-agent.html</guid><category>OpenStack</category><category>development</category><category>Python</category><category>hash</category><category>ring</category><category>partitioning</category></item><item><title>Diving into OpenStack development for fun and profit</title><link>http://nsaje.si/diving-into-openstack.html</link><description>&lt;p&gt;When Gregor Pipan from XLAB called me into his office one day last year and told me that he needed someone to work on OpenStack, I had never heard of that name before. But I said yes and here I am a little over a year later: two OpenStack summits behind me, both in Hong Kong and in Atlanta, and currently working on OpenStack for Red Hat!&lt;/p&gt;
-&lt;div class="section" id="what-is-openstack"&gt;
-&lt;h2&gt;What is OpenStack?&lt;/h2&gt;
-&lt;p&gt;OpenStack is a free and open-source software cloud computing platform. In simple terms, you install it on a bunch of computers which then become your private cloud. You can then start, stop and manage virtual machines, virtual networks and many more things via a web or a command line interface provided by OpenStack. It was initially started as a joint project of Rackspace Hosting and NASA, but is now developed by many companies around the world.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="why-work-on-openstack"&gt;
-&lt;h2&gt;Why work on OpenStack?&lt;/h2&gt;
-&lt;ol class="arabic"&gt;
-&lt;li&gt;&lt;p class="first"&gt;&lt;strong&gt;To be part of something big!&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;As Gregor Pipan put it, OpenStack is the Linux of our time. While still very young, it aims to be the ubiquitous cloud computing platform that will meet the needs for all kinds of cloud deployments regardless of size.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p class="first"&gt;&lt;strong&gt;To work in open-source.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Open-source fosters innovation more than any other kind of software licensing. Since starting out being developed by only two companies, the latest release of OpenStack had contributions from 1235 engineers working for 117 companies. Which brings us to the next reason.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p class="first"&gt;&lt;strong&gt;To get in touch with lots of talented people.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;When working on a project with such a mass of developers, it is very easy to get to know many extremely talented people who will help you advance both your knowledge and your career.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p class="first"&gt;&lt;strong&gt;To get a job.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Last but not least: OpenStack is hot stuff at the moment. At the summit in Atlanta, almost every booth had a big sign saying &amp;quot;We're hiring&amp;quot;. If you'd like to work in something else than web development, here's a great chance. It's a very open community, easy to join, and a huge amount of doors will open for you.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;div class="section" id="how-to-get-started"&gt;
-&lt;h2&gt;How to get started?&lt;/h2&gt;
-&lt;ol class="arabic simple"&gt;
-&lt;li&gt;If you'd like to get your feet wet first, fire up a VM and install &lt;a class="reference external" href="http://devstack.org"&gt;devstack&lt;/a&gt; on it. Devstack is a bash script that installs a development version of OpenStack completely automatically.&lt;/li&gt;
-&lt;li&gt;After that, I'd recommend reading up about OpenStack on &lt;a class="reference external" href="http://en.wikipedia.org/wiki/OpenStack"&gt;Wikipedia&lt;/a&gt;, which gives a great overview of the project.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Read the code!&lt;/strong&gt; Check out the &lt;a class="reference external" href="https://github.com/openstack"&gt;OpenStack repository&lt;/a&gt; on GitHub. After doing #2, you know that OpenStack is comprised of multiple projects. Find out how the one you're most interested in works in detail by reading its code.&lt;/li&gt;
-&lt;li&gt;Join &lt;a class="reference external" href="https://wiki.openstack.org/wiki/IRC"&gt;IRC&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Start reviewing.&lt;/strong&gt; Go to &lt;a class="reference external" href="https://review.openstack.org"&gt;https://review.openstack.org&lt;/a&gt; and search for project of your choice (for example 'project:openstack/nova' in the search bar). Reviewing code might look daunting, but in reality it's the best and quickest way to become a part of the community. Pick a few patches that you can get to know better, then follow what other reviewers are saying about them. This way you will learn the style of communication within the community, the typical mistakes and you'll get to know the inner workings of your project better!&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Fix bugs.&lt;/strong&gt; When you're familiar enough with the code, you can start fixing bugs, which will probably be the gateway to actually getting your code into OpenStack. This is the really fun part, but it takes some setting up, check out &lt;a class="reference external" href="https://wiki.openstack.org/wiki/Gerrit_Workflow"&gt;OpenStack Gerrit Workflow&lt;/a&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;div class="section" id="communication-in-the-community"&gt;
-&lt;h2&gt;Communication in the community&lt;/h2&gt;
-&lt;p&gt;In the world of open source, where most of the communication is done over text-only channels like e-mail and IRC, solid communication skills are even more important than elsewhere.&lt;/p&gt;
-&lt;p&gt;Be communicative, constructive, friendly, patient and the community will welcome you. Be needy, spammy, arrogant and the community will ignore you.&lt;/p&gt;
-&lt;p&gt;A protip for those of you that aren't used to IRC: if you write something in the channel, you probably won't get a response. People don't watch their IRC clients all day, they get a notification when their nick is included in some text. It's therefore best to figure out beforehand &lt;em&gt;who&lt;/em&gt; you want to ask and then ask them directly.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="conclusion"&gt;
-&lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Get cracking, good luck and see you at the next summit!&lt;/strong&gt;&lt;/p&gt;
-&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nejc Saje</dc:creator><pubDate>Tue, 12 Aug 2014 21:10:00 +0200</pubDate><guid>tag:nsaje.si,2014-08-12:diving-into-openstack.html</guid><category>OpenStack</category><category>development</category><category>Python</category></item><item><title>Dependency-less REST CPU burner in Go</title><link>http://nsaje.si/dependency-less-rest-cpu-burner-in-go.html</link><description>&lt;p&gt;Disclaimer: not really REST, but writing HTTP-controlled made the title too long.&lt;/p&gt;
+&lt;p&gt;But you don't want to have one Central …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nejc Saje</dc:creator><pubDate>Wed, 14 Jan 2015 11:04:00 +0100</pubDate><guid isPermaLink="false">tag:nejc.saje.info,2015-01-14:/ceilometer-central-agent.html</guid><category>OpenStack</category><category>OpenStack</category><category>development</category><category>Python</category><category>hash</category><category>ring</category><category>partitioning</category></item><item><title>Diving into OpenStack development for fun and profit</title><link>http://nejc.saje.info/diving-into-openstack.html</link><description>&lt;p&gt;When Gregor Pipan from XLAB called me into his office one day last year and told me that he needed someone to work on OpenStack, I had never heard of that name before. But I said yes and here I am a little over a year later: two OpenStack summits …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nejc Saje</dc:creator><pubDate>Tue, 12 Aug 2014 21:10:00 +0200</pubDate><guid isPermaLink="false">tag:nejc.saje.info,2014-08-12:/diving-into-openstack.html</guid><category>OpenStack</category><category>OpenStack</category><category>development</category><category>Python</category></item><item><title>Dependency-less REST CPU burner in Go</title><link>http://nejc.saje.info/dependency-less-rest-cpu-burner-in-go.html</link><description>&lt;p&gt;Disclaimer: not really REST, but writing HTTP-controlled made the title too long.&lt;/p&gt;
 &lt;h2&gt;TL;DR&lt;/h2&gt;
 &lt;p&gt;When compiled with &lt;code&gt;CGO_ENABLED=0&lt;/code&gt;, this code produces a static binary file that can be uploaded to a server and run.
 CPU burn can be started by requesting &lt;code&gt;/start_cpu&lt;/code&gt; and stopped by requesting &lt;code&gt;/stop_cpu&lt;/code&gt;.&lt;/p&gt;
-&lt;h2&gt;Long version&lt;/h2&gt;
-&lt;p&gt;Recently I had to implement an integration test in which I had to fire up a virtual machine and control its CPU load. The first idea was to write a simple Python web service, so I could control the CPU load via HTTP requests. The testing was being done on devstack though, and its test VM image is that of &lt;a href="https://launchpad.net/cirros"&gt;CirrOS&lt;/a&gt;, which only includes Busybox and no Python.&lt;/p&gt;
-&lt;p&gt;So I needed a static binary I could just &lt;code&gt;scp&lt;/code&gt; on the VM and run. &lt;a href="http://golang.org"&gt;Go&lt;/a&gt; turned out to be the answer to my problem. Even though I never programmed in Go before, I soon had a working HTTP-controlled staticly linked web service. To achieve static linking, the compiler and the code needs to be compiled with environment variable &lt;code&gt;CGO_ENABLED=0&lt;/code&gt; (&lt;a href="https://groups.google.com/forum/#!topic/golang-nuts/Rw89bnhPBUI"&gt;issue&lt;/a&gt;).&lt;/p&gt;
-&lt;h3&gt;Cross compilation&lt;/h3&gt;
-&lt;p&gt;On top of that, Go allowed me to easily cross-compile a Linux binary on OSX just by (quickly) recompiling Go compiler with Linux support&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;cd /usr/local/go/src
-sudo GOOS=linux GOARCH=386 CGO_ENABLED=0 ./make.bash --no-clean
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;and then compiling my code with additional options &lt;code&gt;GOOS=linux GOARCH=386&lt;/code&gt;.
-Other platforms are similar, for more information take a look at &lt;a href="http://dave.cheney.net/2012/09/08/an-introduction-to-cross-compilation-with-go"&gt;An introduction to cross compilation with Go&lt;/a&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;package&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;
-
-&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
-    &lt;span class="s"&gt;&amp;quot;fmt&amp;quot;&lt;/span&gt;
-    &lt;span class="s"&gt;&amp;quot;net/http&amp;quot;&lt;/span&gt;
-    &lt;span class="s"&gt;&amp;quot;time&amp;quot;&lt;/span&gt;
-&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;var&lt;/span&gt; &lt;span class="n"&gt;burnCpu&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;make&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;chan&lt;/span&gt; &lt;span class="nb"&gt;bool&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;func&lt;/span&gt; &lt;span class="n"&gt;cpuBurn&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;var&lt;/span&gt; &lt;span class="n"&gt;burn&lt;/span&gt; &lt;span class="nb"&gt;bool&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;false&lt;/span&gt;
-    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="n"&gt;select&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="n"&gt;case&lt;/span&gt; &lt;span class="n"&gt;burn&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt;&lt;span class="n"&gt;burnCpu&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-        &lt;span class="n"&gt;default&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;burn&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-                &lt;span class="n"&gt;_&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;
-            &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-                &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Millisecond&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-            &lt;span class="p"&gt;}&lt;/span&gt;
-        &lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="n"&gt;func&lt;/span&gt; &lt;span class="n"&gt;startCpu&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ResponseWriter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Request&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;fmt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Fprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Starting CPU burn&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;burnCpu&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;true&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="n"&gt;func&lt;/span&gt; &lt;span class="n"&gt;stopCpu&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ResponseWriter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Request&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;fmt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Fprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Stopping CPU burn&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;burnCpu&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;false&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="n"&gt;func&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;go&lt;/span&gt; &lt;span class="n"&gt;cpuBurn&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-    &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;HandleFunc&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/start_cpu&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;startCpu&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;HandleFunc&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/stop_cpu&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;stopCpu&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ListenAndServe&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;:8080&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nejc Saje</dc:creator><pubDate>Fri, 24 Jan 2014 08:40:00 +0100</pubDate><guid>tag:nsaje.si,2014-01-24:dependency-less-rest-cpu-burner-in-go.html</guid><category>golang</category><category>openstack</category><category>cirros</category></item><item><title>OpenStack development with Vagrant and PyCharm</title><link>http://nsaje.si/openstack-development-with-vagrant-and-pycharm.html</link><description>&lt;p&gt;Up until now, my OpenStack development setup looked like this:&lt;/p&gt;
+&lt;h2&gt;Long version …&lt;/h2&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nejc Saje</dc:creator><pubDate>Fri, 24 Jan 2014 08:40:00 +0100</pubDate><guid isPermaLink="false">tag:nejc.saje.info,2014-01-24:/dependency-less-rest-cpu-burner-in-go.html</guid><category>Programming</category><category>golang</category><category>openstack</category><category>cirros</category></item><item><title>OpenStack development with Vagrant and PyCharm</title><link>http://nejc.saje.info/openstack-development-with-vagrant-and-pycharm.html</link><description>&lt;p&gt;Up until now, my OpenStack development setup looked like this:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;devstack running in a VM,&lt;/li&gt;
 &lt;li&gt;developing using tmux &amp;amp; vim over SSH.&lt;/li&gt;
@@ -129,76 +28,4 @@ Other platforms are similar, for more information take a look at &lt;a href="htt
 &lt;p&gt;Since I was hearing good things about PyCharm, I decided to give it a try. The idea of the setup is as follows:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;devstack running in a VM,&lt;/li&gt;
-&lt;li&gt;developing using PyCharm running locally.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;To achieve this, I used the concept of shared/synced folders. Development files are kept on the host machine, where I can use an IDE such as PyCharm for development, but are also be mounted in my devstack VM via NFS. In fact, the entire Devstack's &lt;code&gt;/opt/stack&lt;/code&gt; directory is kept on the host machine. For easy setup, I used &lt;a href="http://www.vagrantup.com"&gt;Vagrant 1.3.5&lt;/a&gt; and &lt;a href="https://www.virtualbox.org"&gt;Virtualbox 4.3.2&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Vagrant and PyCharm" src="images/vagrantpycharm.png" /&gt;&lt;/p&gt;
-&lt;p&gt;With the help of blog posts by &lt;a href="http://terriyu.info/blog/posts/2013/07/installing-devstack-ceilometer/"&gt;Terri Yu&lt;/a&gt;, &lt;a href="http://anteaya.info/blog/2013/09/01/installing-devstack-with-vagrant/"&gt;Anita Kuno&lt;/a&gt; and many helpful tips from John Herndon of HP, I came up with this Vagrantfile (&lt;a href="https://gist.github.com/nsaje/14f72ce299f6cc1275ae/download"&gt;download&lt;/a&gt;):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;script&lt;/span&gt;&lt;span class="x"&gt; = &amp;lt;&amp;lt;SCRIPT&lt;/span&gt;
-&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="x"&gt; download required packages&lt;/span&gt;
-&lt;span class="x"&gt;apt-get update&lt;/span&gt;
-&lt;span class="x"&gt;apt-get -y install git vim-gtk libxml2-dev libxslt1-dev libpq-dev python-pip libsqlite3-dev&lt;/span&gt;
-&lt;span class="x"&gt;apt-get -y build-dep python-mysqldb&lt;/span&gt;
-&lt;span class="x"&gt;pip install git-review tox&lt;/span&gt;
-
-&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="x"&gt; download devstack&lt;/span&gt;
-&lt;span class="x"&gt;git clone git://git.openstack.org/openstack-dev/devstack&lt;/span&gt;
-&lt;span class="x"&gt;chown -R vagrant:vagrant devstack&lt;/span&gt;
-
-&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="x"&gt; create minimal localrc&lt;/span&gt;
-&lt;span class="x"&gt;cat &amp;lt;&amp;lt;_LOCALRC &amp;gt; devstack/localrc&lt;/span&gt;
-&lt;span class="x"&gt;ADMIN_PASSWORD=password&lt;/span&gt;
-&lt;span class="x"&gt;MYSQL_PASSWORD=password&lt;/span&gt;
-&lt;span class="x"&gt;RABBIT_PASSWORD=password&lt;/span&gt;
-&lt;span class="x"&gt;SERVICE_PASSWORD=password&lt;/span&gt;
-&lt;span class="x"&gt;SERVICE_TOKEN=tokentoken&lt;/span&gt;
-
-&lt;span class="x"&gt;LOGFILE=stack.sh.log&lt;/span&gt;
-&lt;span class="x"&gt;LOGDAYS=1&lt;/span&gt;
-
-&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="x"&gt; data must not be inside NFS share&lt;/span&gt;
-&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="x"&gt; because devstack tries to chown directories&lt;/span&gt;
-&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="x"&gt; and NFS doesn&amp;#39;t allow it&lt;/span&gt;
-&lt;span class="x"&gt;DATA_DIR=/opt/data&lt;/span&gt;
-&lt;span class="x"&gt;_LOCALRC&lt;/span&gt;
-&lt;span class="x"&gt;SCRIPT&lt;/span&gt;
-
-&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Vagrant config&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
-&lt;span class="x"&gt;VAGRANTFILE_API_VERSION = &amp;quot;2&amp;quot;&lt;/span&gt;
-
-&lt;span class="x"&gt;Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|&lt;/span&gt;
-&lt;span class="x"&gt;  config.vm.box = &amp;quot;precise64&amp;quot;&lt;/span&gt;
-&lt;span class="x"&gt;  config.vm.box_url = &amp;quot;http://files.vagrantup.com/precise64.box&amp;quot;&lt;/span&gt;
-
-&lt;span class="x"&gt;  &lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="x"&gt; Change memory of our VM to 2048MB&lt;/span&gt;
-&lt;span class="x"&gt;  config.vm.provider :virtualbox do |vb|&lt;/span&gt;
-&lt;span class="x"&gt;    vb.customize [&amp;quot;modifyvm&amp;quot;, :id, &amp;quot;--memory&amp;quot;, &amp;quot;2048&amp;quot;]&lt;/span&gt;
-&lt;span class="x"&gt;  end&lt;/span&gt;
-
-&lt;span class="x"&gt;  &lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="x"&gt; Forward port for Horizon&lt;/span&gt;
-&lt;span class="x"&gt;  config.vm.network :forwarded_port, guest: 80, host: 8080&lt;/span&gt;
-
-&lt;span class="x"&gt;  &lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="x"&gt; Private network IP, needed for NFS&lt;/span&gt;
-&lt;span class="x"&gt;  config.vm.network :private_network, ip: &amp;quot;192.168.33.10&amp;quot;&lt;/span&gt;
-
-&lt;span class="x"&gt;  &lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="x"&gt; /opt/stack is synced with vagrant project dir over NFS&lt;/span&gt;
-&lt;span class="x"&gt;  config.vm.synced_folder &amp;quot;.&amp;quot;, &amp;quot;/opt/stack&amp;quot;, nfs: true&lt;/span&gt;
-
-&lt;span class="x"&gt;  config.vm.provision &amp;quot;shell&amp;quot;, inline: &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;script&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
-&lt;span class="x"&gt;end&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;All you need to do to get a Devstack development environment with its &lt;code&gt;/opt/stack&lt;/code&gt; kept on the host machine is copy this Vagrantfile into your directory of choice and run&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;vagrant up
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h2&gt;Setting up PyCharm&lt;/h2&gt;
-&lt;p&gt;This part is really easy, just follow the instructions at &lt;a href=""&gt;https://www.jetbrains.com/pycharm/webhelp/remote-debugging.html#5&lt;/a&gt;. Basically you just click a button that fills in your Vagrant config and voilà, you can run and debug projects on your devstack VM.&lt;/p&gt;
-&lt;h2&gt;Lessons learned&lt;/h2&gt;
-&lt;p&gt;I was warned about these by John Herndon, but I had to try them out myself to see why:&lt;/p&gt;
-&lt;h4&gt;1. Devstack's DATA_DIR variable mustn't reside on the NFS share&lt;/h4&gt;
-&lt;p&gt;Nova creates stuff in the data directory with root permissions and then tries to &lt;code&gt;chown&lt;/code&gt; them, which fails on the NFS share.&lt;/p&gt;
-&lt;h4&gt;2. NFS share must reside on a case-sensitive filesystem&lt;/h4&gt;
-&lt;p&gt;Unit tests for some projects require python packages that have the same name, save for the case. In my case, the problematic packages were &lt;code&gt;Crypto&lt;/code&gt; and &lt;code&gt;crypto&lt;/code&gt;.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nejc Saje</dc:creator><pubDate>Fri, 15 Nov 2013 10:20:00 +0100</pubDate><guid>tag:nsaje.si,2013-11-15:openstack-development-with-vagrant-and-pycharm.html</guid><category>python</category><category>openstack</category><category>devstack</category><category>vagrant</category><category>pycharm</category><category>remote</category><category>development</category></item></channel></rss>
+&lt;li&gt;developing …&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nejc Saje</dc:creator><pubDate>Fri, 15 Nov 2013 10:20:00 +0100</pubDate><guid isPermaLink="false">tag:nejc.saje.info,2013-11-15:/openstack-development-with-vagrant-and-pycharm.html</guid><category>OpenStack</category><category>python</category><category>openstack</category><category>devstack</category><category>vagrant</category><category>pycharm</category><category>remote</category><category>development</category></item></channel></rss>

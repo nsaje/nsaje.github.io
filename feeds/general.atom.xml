@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Nejc Saje</title><link href="http://nejc.saje.info/" rel="alternate"></link><link href="http://nejc.saje.info/feeds/general.atom.xml" rel="self"></link><id>http://nejc.saje.info/</id><updated>2017-02-08T08:20:00+01:00</updated><entry><title>Best Colorscheme For The Eyes</title><link href="http://nejc.saje.info/best-colorscheme-for-the-eyes.html" rel="alternate"></link><updated>2017-02-08T08:20:00+01:00</updated><author><name>Nejc Saje</name></author><id>tag:nejc.saje.info,2017-02-08:best-colorscheme-for-the-eyes.html</id><summary type="html">&lt;p&gt;From time to time the coworkers who stop by my desk ask me something
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Nejc Saje - General</title><link href="http://nejc.saje.info/" rel="alternate"></link><link href="http://nejc.saje.info/feeds/general.atom.xml" rel="self"></link><id>http://nejc.saje.info/</id><updated>2017-02-08T08:20:00+01:00</updated><entry><title>Best Colorscheme For The Eyes</title><link href="http://nejc.saje.info/best-colorscheme-for-the-eyes.html" rel="alternate"></link><published>2017-02-08T08:20:00+01:00</published><updated>2017-02-08T08:20:00+01:00</updated><author><name>Nejc Saje</name></author><id>tag:nejc.saje.info,2017-02-08:/best-colorscheme-for-the-eyes.html</id><summary type="html">&lt;p&gt;From time to time the coworkers who stop by my desk ask me something
+along the lines of "Is that a yellow background? How can your eyes stand
+that, isn't light text on a dark background better for the eyes?"&lt;/p&gt;
+&lt;p&gt;&lt;img src='images/colorscheme.png' style="width: 750px;"/&gt;&lt;/p&gt;
+&lt;p&gt;That is a common misconception among programmers, myself included until …&lt;/p&gt;</summary><content type="html">&lt;p&gt;From time to time the coworkers who stop by my desk ask me something
 along the lines of "Is that a yellow background? How can your eyes stand
 that, isn't light text on a dark background better for the eyes?"&lt;/p&gt;
 &lt;p&gt;&lt;img src='images/colorscheme.png' style="width: 750px;"/&gt;&lt;/p&gt;
@@ -53,4 +57,4 @@ contrast like using a light gray (#EEE, #DDD, #CCC) on a dark background
 straining on the eyes. I use &lt;a href="http://ethanschoonover.com/solarized"&gt;Solarized
 Light&lt;/a&gt;, a color scheme with just the
 right amount of contrast for best legibility and a background with reduced
-blue light content compared to a white background. And yes, it's yellow.&lt;/p&gt;</summary><category term="programming"></category><category term="colorscheme"></category><category term="color"></category><category term="background"></category><category term="solarized"></category><category term="contrast"></category></entry></feed>
+blue light content compared to a white background. And yes, it's yellow.&lt;/p&gt;</content><category term="General"></category><category term="programming"></category><category term="colorscheme"></category><category term="color"></category><category term="background"></category><category term="solarized"></category><category term="contrast"></category></entry></feed>
